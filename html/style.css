@@ -31,7 +31,7 @@ html, body {
 .column{
     display: flex;
     flex-direction: column;
-    margin: 0px 40px 0px 40px;
+    margin: 40px 40px 40px 40px;
 
 }
 
@@ -57,7 +57,7 @@ label{
     background-color: #1DD1A1;
     height: 40px;
     box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.17);
-    width: 100%;
+    
     border: none;
     margin: 15px 0px 15px 0px;
 }
@@ -90,7 +90,7 @@ label{
     background: transparent;
     border: 2px solid;
     border-color: #576574;
-    padding: 1em;
+    padding: 0.5em 1em;
     margin-left: 10px;
     cursor: pointer;
     outline-style:none;
@@ -103,7 +103,7 @@ label{
     border: 2px solid;
     border-color: #1DD1A1;
     color: #1DD1A1;
-    padding: 1em;
+    padding: 0.5em 1em;
     margin-left: 10px;
     outline-style:none;
     
@@ -113,7 +113,10 @@ label{
     
 }
 .avatar-holder{
+    display: flex;
+    align-items: center;
     padding: 20px;
+
 }
 
 .dashboard-container-head{
@@ -136,15 +139,19 @@ select{
     background: #fff;
     border: 2px solid;
     border-color: #C6C6C6;
-    padding: 1em 2em;
+    padding: 0.5em 1em;
+    width: 150px;
+    margin-left: 10px;
+    outline-style:none;
 }
 table{
-   
+
        text-align: left;
         border-collapse: separate;
         border-spacing: 0px 5px;
         border-right: none;
         width: 100%;
+        margin-top: 30px;
      
 }
 th{
@@ -179,4 +186,110 @@ td{
     padding: 1em 2em;
     cursor: pointer;
     Color: #fff;
+}
+.tab-button{
+    background: #1DD1A1;
+    color: #fff;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 1em 2em;
+    border: none;
+    cursor: pointer;
+    outline-style:none;
+    margin: none;
+    margin-left:-5px;
+}
+.tab-button:focus{
+    background:  #C9E5DD ;
+    color: #fff;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 1em 2em;
+    border: none;
+    cursor: pointer;
+    outline-style:none;
+    margin-left:-5px;
+}
+.margin-left{
+    margin-left: 25px;
+    color: #4D4D4D; 
+}
+footer{
+    position: fixed;
+    bottom: 0px;
+    right: 0px; 
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    background-color: black;
+    width: 100%;
+    text-align: right;
+    padding: 15px;
+
+}
+h2{
+    color: white;
+    margin-right: 50px;
+}
+.avatar-img{
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+    border-radius: 50px;
+    margin-right: 15px;
+}
+.alert{
+    display: flex;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background-color:rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.alert-message{
+    width: 440px;
+    padding: 40px;
+    color: #576574;
+    background-color: white;
+    border-radius: 15px;
+}
+.alert-message h2{
+    color:#576574;
+    margin-top: 0;
+}
+.delete-button-delete{
+    font-size: 15px;
+    background: #576574;
+    box-shadow: 0px 0px 16px  rgba(0, 0, 0, 0.17);
+    color: #fff ;
+    padding: 0.5em 1em;
+    border:2px solid;
+    border-color: #576574;
+}
+.delete-button-cancel{
+    font-size: 15px;
+    font-weight: bold;
+    background: #fff;
+    color: #576574 ;
+    padding: 0.5em 1em;
+    border:2px solid;
+    border-color: #fff;
+}
+.delete-button-cancel:hover{
+    font-size: 15px;
+    font-weight: bold;
+    background-color: #fff;
+    color: #576574 ;
+    padding: 0.5em 1em;
+    border: 2px solid;
+}
+.alert-button-holder{
+    width: 100%;
+    text-align: right;
+    margin-bottom: 0px;
 }

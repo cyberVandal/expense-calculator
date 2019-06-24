@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>Expenses</title>
 </head>
 <body>
     <header class="dashboard-header">
@@ -14,27 +14,28 @@
             <button class="button-ghost border-radius">EXPENSES</button>
         </div>
         <div class="avatar-holder">
-            <img class="avatar-img" src="https://cdn.pixabay.com/photo/2018/01/15/07/51/woman-3083376__340.jpg" alt="Smiley face" >
+                <img class="avatar-img" src="https://cdn.pixabay.com/photo/2018/01/15/07/51/woman-3083376__340.jpg" alt="Smiley face" >
             <span>Milena Spasovska</span>
         </div>
     </header>
     <div class="dashboard-container">
 
-            <button class="fixed-button border-radius">ADD NEW</button>
+            
             <div class="column">
                 <div class="dashboard-container-head">
-                    <div> 
-                        <h1>Products</h1>
-                    </div>
-                    <div>
-                            <select class="border-radius">
-                                    <option value="volvo">Day</option>
-                                    <option value="saab">Mounth</option>
-                                    <option value="opel">Year</option>
-                                   
-                            </select>
-                    </div>
+                        <h1>Expenses</h1>     
                 </div>
+                <div>
+                    <button class="tab-button border-radius">MONTHLY</button>
+                    <button class="tab-button border-radius">YEARLY</button>
+                    <label class="margin-left">Choose Month</label>
+                    <select class="border-radius">
+                            <option value="volvo">Day</option>
+                            <option value="saab">Mounth</option>
+                            <option value="opel">Year</option>
+                           
+                    </select>
+                 </div>
                 <div class="dashboard-container-table">
                         <table >
                                 <tr>
@@ -130,20 +131,13 @@
                 </div>
             </div>
            
+
+           
            
     </div>
-        
-    <div class="alert">
-        <div class="alert-message">
-            <h2>Delete Product</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum eligendi at iusto vel numquam voluptatem odit modi maiores recusandae accusantium.</p>
-            <div class="alert-button-holder">
-                <button class="delete-button-cancel border-radius">CANCEL</button>
-                <button class="delete-button-delete border-radius">DELETE</button>
-            </div>
-           
-        </div>
-    </div>
+    <footer> 
+        <h2>Total spent: 1250 den.</h2>
+    </footer>    
 
     
 </body>
