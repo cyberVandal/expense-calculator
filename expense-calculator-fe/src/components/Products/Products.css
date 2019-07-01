@@ -25,14 +25,9 @@ html, body {
       
 }
 .main{
-<<<<<<< HEAD
-    width: 300px;
-    padding: 25px;
-=======
     
     width:270px;
     padding: 35px;
->>>>>>> 308668577058ea83de5919bb4e7f2cd480b4bf69
     background-color:white;
     border-radius: 10px;
 }
@@ -57,13 +52,8 @@ label{
     background-color:  #fff;
     border: 2px solid;
     border-color: #C6C6C6;
-<<<<<<< HEAD
-    margin-bottom: 20px;
-    width: 100%;
-=======
     box-sizing: border-box;
     margin-bottom: 15px;
->>>>>>> 308668577058ea83de5919bb4e7f2cd480b4bf69
     
 }
 .button-solid{
@@ -77,15 +67,9 @@ label{
     background-color: #1DD1A1;
     height: 40px;
     box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.17);
-<<<<<<< HEAD
-    width:100%;
-    border: none;
-    margin: 15px 0px 15px 0px;
-=======
     padding: 0px;
     
     margin: 15px 0px 0px 0px;
->>>>>>> 308668577058ea83de5919bb4e7f2cd480b4bf69
 }
 .form-padding{
     /* padding:20px; */
@@ -174,15 +158,6 @@ select{
 }
 table{
 
-<<<<<<< HEAD
-       text-align: left;
-        border-collapse: separate;
-        border-spacing: 0px 5px;
-        border-right: none;
-        width: 100%;
-        margin-top: 30px;
-        margin-bottom: 70px;
-=======
     text-align: left;
     border-collapse: separate;
     border-spacing: 0px 5px;
@@ -190,7 +165,6 @@ table{
     width: 100%;
     margin-top: 30px;
     margin-bottom: 70px;
->>>>>>> 308668577058ea83de5919bb4e7f2cd480b4bf69
      
 }
 th{
@@ -358,4 +332,7 @@ h2{
 }
 #non-something:target{
     visibility: hidden;
+}
+.nav-link{
+    text-decoration: none;
 }

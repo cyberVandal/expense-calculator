@@ -22,11 +22,14 @@ function Login() {
               name="pass"
             />
             <br />
+            <NavLink  exact  to="/products">
             <input
               className={`${classes.borderRadius} ${classes.buttonSolid}`}
               type="submit"
               value="SIGN IN"
             />
+            </NavLink>
+           
           </form>
         </div>
         <div className={classes.textHolder}>
