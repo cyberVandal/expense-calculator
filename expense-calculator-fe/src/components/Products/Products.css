@@ -335,4 +335,8 @@ h2{
 }
 .nav-link{
     text-decoration: none;
+    
+}
+.nav-link:visited{
+    color:#576574;
 }

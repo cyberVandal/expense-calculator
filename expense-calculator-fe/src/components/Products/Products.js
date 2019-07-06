@@ -1,4 +1,5 @@
 import React, {Component} from "react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './Products.css';
 import {NavLink} from 'react-router-dom';
 import Header from "../Header/Header";
@@ -42,7 +43,7 @@ class  Products extends Component {
                                           <td>Marie Bertrand</td>
                                           
                                           
-                                          <td><a href="#something"><i className="far fa-trash-alt"></i></a></td>
+                                          <td><a href="#something" className="nav-link"><span><FontAwesomeIcon icon="edit" /></span><span style={{marginLeft:"10px"}}><FontAwesomeIcon icon="trash-alt" /></span></a></td>
                                         </tr>
                                         <tr>
                                           <td>Berglunds snabbköp</td>
@@ -50,7 +51,7 @@ class  Products extends Component {
                                           <td>Sweden</td>
                                           <td>Sweden</td>
                                           <td>Marie Bertrand</td>
-                                          <td><i className="far fa-trash-alt"></i></td>
+                                          <td> <span><FontAwesomeIcon icon="edit" /></span><span style={{marginLeft:"10px"}}><FontAwesomeIcon icon="trash-alt" /></span></td>
                                         </tr>
                                         <tr>
                                           <td>Centro comercial Moctezuma</td>
@@ -58,7 +59,7 @@ class  Products extends Component {
                                           <td>Mexico</td>
                                           <td>Mexico</td>
                                           <td>Marie Bertrand</td>
-                                          <td><i className="far fa-trash-alt"></i></td>
+                                          <td><span><FontAwesomeIcon icon="edit" /></span><span style={{marginLeft:"10px"}}><FontAwesomeIcon icon="trash-alt" /></span></td>
                                         </tr>
                                         <tr>
                                           <td>Ernst Handel</td>
@@ -66,7 +67,7 @@ class  Products extends Component {
                                           <td>Austria</td>
                                           <td>Roland Mendel</td>
                                           <td>Marie Bertrand</td>
-                                          <td><i className="far fa-trash-alt"></i></td>
+                                          <td><span><FontAwesomeIcon icon="edit" /></span><span style={{marginLeft:"10px"}}><FontAwesomeIcon icon="trash-alt" /></span></td>
                                         </tr>
                                         <tr>
                                           <td>Island Trading</td>
@@ -74,7 +75,7 @@ class  Products extends Component {
                                           <td>UK</td>
                                           <td>UK</td>
                                           <td>Marie Bertrand</td>
-                                          <td><i className="far fa-trash-alt"></i></td>
+                                          <td><span><FontAwesomeIcon icon="edit" /></span><span style={{marginLeft:"10px"}}><FontAwesomeIcon icon="trash-alt" /></span></td>
                                         </tr>
                                         <tr>
                                           <td>Königlich Essen</td>
@@ -82,7 +83,7 @@ class  Products extends Component {
                                           <td>Germany</td>
                                           <td>Philip Cramer</td>
                                           <td>Marie Bertrand</td>
-                                          <td><i className="far fa-trash-alt"></i></td>
+                                          <td><span><FontAwesomeIcon icon="edit" /></span><span style={{marginLeft:"10px"}}><FontAwesomeIcon icon="trash-alt" /></span></td>
                                         </tr>
                                         <tr>
                                           <td>Laughing Bacchus Winecellars</td>
@@ -90,7 +91,7 @@ class  Products extends Component {
                                           <td>Canada</td>
                                           <td>Yoshi Tannamuri</td>
                                           <td>Marie Bertrand</td>
-                                          <td><i className="far fa-trash-alt"></i></td>
+                                          <td><span><FontAwesomeIcon icon="edit" /></span><span style={{marginLeft:"10px"}}><FontAwesomeIcon icon="trash-alt" /></span></td>
                                         </tr>
                                         <tr>
                                           <td>Magazzini Alimentari Riuniti</td>
@@ -98,7 +99,7 @@ class  Products extends Component {
                                           <td>Italy</td>
                                           <td>Giovanni Rovelli</td>
                                           <td>Marie Bertrand</td>
-                                          <td><i className="far fa-trash-alt"></i></td>
+                                          <td><span><FontAwesomeIcon icon="edit" /></span><span style={{marginLeft:"10px"}}><FontAwesomeIcon icon="trash-alt" /></span></td>
                                         </tr>
                                         <tr>
                                           <td>North/South</td>
@@ -106,7 +107,7 @@ class  Products extends Component {
                                           <td>UK</td>
                                           <td>Simon Crowther</td>
                                           <td>Marie Bertrand</td>
-                                          <td><i className="far fa-trash-alt"></i></td>
+                                          <td><span><FontAwesomeIcon icon="edit" /></span><span style={{marginLeft:"10px"}}><FontAwesomeIcon icon="trash-alt" /></span></td>
                                         </tr>
                                         <tr>
                                           <td>Paris spécialités</td>
@@ -114,7 +115,7 @@ class  Products extends Component {
                                           <td>France</td>
                                           <td>Marie Bertrand</td>
                                           <td>Marie Bertrand</td>
-                                          <td><i className="far fa-trash-alt"></i></td>
+                                          <td><span><FontAwesomeIcon icon="edit" /></span><span style={{marginLeft:"10px"}}><FontAwesomeIcon icon="trash-alt" /></span></td>
                                         </tr>
                                       </table>
         

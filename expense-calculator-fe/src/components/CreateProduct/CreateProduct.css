@@ -54,6 +54,7 @@ label{
     border-color: #C6C6C6;
     box-sizing: border-box;
     margin-bottom: 15px;
+    padding: 1em 0;
     
 }
 .button-solid{
@@ -315,7 +316,6 @@ h2{
   }
   
 #something:target {    
-    display: flex;
     position: absolute;
     top: 0;
     right: 0;
@@ -335,4 +335,29 @@ h2{
 }
 .nav-link{
     text-decoration: none;
+}
+
+.create-product{
+    display:flex;
+    flex-direction: row;
+    Box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.17);
+    border-radius:10px;
+
+}
+.create-product-left{
+    width:400px;
+    padding: 35px;
+    background-color:white;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+.create-product-right{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+    color:  #8D8D8D;
+    background-color:#EDEDED;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
