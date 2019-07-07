@@ -19,7 +19,8 @@ class Products extends Component {
     }
   }
   componentDidMount() {
-    console.log(this.props.prods.length)
+    this.props.setSectionStatus("products");
+
     if (this.props.prods.length === 0) {
 
       axios.get('http://localhost:8080/products')
@@ -30,6 +31,8 @@ class Products extends Component {
 
       // this.setState({ products: this.props.prods, filtered: this.props.prods });
     }
+
+
 
   }
 
@@ -109,7 +112,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     init: (products) => dispatch(actionTypes.initGlobalState(products)),
-    removeProduct: (id) => dispatch(actionTypes.removeProduct(id))
+    removeProduct: (id) => dispatch(actionTypes.removeProduct(id)),
+    setSectionStatus: (status) => dispatch(actionTypes.setSectionStatus(status))
   }
 }
 

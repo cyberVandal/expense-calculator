@@ -10,6 +10,7 @@ class Expenses extends Component {
   componentDidMount() {
 
     this.props.setSectionStatus("expenses");
+
   }
 
   tabClickHandler = (status) => {

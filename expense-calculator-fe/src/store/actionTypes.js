@@ -35,10 +35,10 @@ export const setTabStatus = payload => {
 		payload: payload
 	};
 };
-export const setSectionStatus = () => {
+export const setSectionStatus = payload => {
 	return {
 		type: SET_SECTION_STATUS,
-
+		payload: payload
 	};
 };
 
