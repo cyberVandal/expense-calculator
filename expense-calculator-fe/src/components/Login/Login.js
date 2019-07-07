@@ -1,40 +1,38 @@
 import React from "react";
-import classes from "./Login.module.css";
-import {NavLink} from 'react-router-dom';
+import "../../css/Global.css"
+import { NavLink } from 'react-router-dom';
 
 function Login() {
   return (
-    <div className={classes.wrapper}>
-      <div className={classes.column}>
-        <div className={classes.main}>
+    <div className="wrapper">
+      <div className="column">
+        <div className="main">
           <form>
             <label for="email">E-mail:</label>
             <input
-              className={`${classes.borderRadius} ${classes.formInput}`}
+              className="border-radius form-input"
               type="text"
               name="email"
             />
-            <br />
             <label for="pass">Password:</label>
             <input
-              className={`${classes.borderRadius} ${classes.formInput}`}
+              className="border-radius form-input"
               type="password"
               name="pass"
             />
-            <br />
-            <NavLink  exact  to="/products">
-            <input
-              className={`${classes.borderRadius} ${classes.buttonSolid}`}
-              type="submit"
-              value="SIGN IN"
-            />
+            <NavLink exact to="/products">
+              <input
+                className="border-radius button-solid"
+                type="submit"
+                value="SIGN IN"
+              />
             </NavLink>
-           
+
           </form>
         </div>
-        <div className={classes.textHolder}>
+        <div className="text-holder">
           <p>
-            Or if you don't have account{" "} <NavLink  exact  to="/register">register</NavLink>         
+            Or if you don't have account{" "} <NavLink exact to="/register">register</NavLink>
           </p>
         </div>
       </div>

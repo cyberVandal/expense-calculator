@@ -1,70 +1,70 @@
 import React from "react";
-import {NavLink} from 'react-router-dom';
-import classes from "./Register.module.css";
+import { NavLink } from 'react-router-dom';
+import '../../css/Global.css';
 
 function Register() {
   return (
-    <div className={classes.wrapper}>
-      <div className={classes.column}>
-        <div className={classes.main}>
+    <div className="wrapper">
+      <div className="column">
+        <div className="main">
           <form>
             <label for="email">First Name:</label>
-            <input   
-                className={`${classes.borderRadius} ${classes.formInput}`} 
-                type="text" 
-                name="firstName" 
+            <input
+              className="border-radius form-input"
+              type="text"
+              name="firstName"
             />
-             <br />
+            <br />
             <label for="lastName">Last Name:</label>
-            <input  
-                className={`${classes.borderRadius} ${classes.formInput}`} 
-                type="text" 
-                name="lastName" 
+            <input
+              className="border-radius form-input"
+              type="text"
+              name="lastName"
             />
             <label for="email">E-mail:</label>
             <input
-              className={`${classes.borderRadius} ${classes.formInput}`}
+              className="border-radius form-input"
               type="text"
               name="email"
             />
             <br />
             <label for="dateOfBirth">Date of Birth:</label>
-            <input 
-                className={`${classes.borderRadius} ${classes.formInput}`} 
-                type="text" 
-                name="dateOfBirth"
-             />
-            <br /> 
-            <label for="telephone">Thelephone:</label>
-            <input 
-                className={`${classes.borderRadius} ${classes.formInput}`} 
-                type="text" 
-                name="telephone" 
-            />
-            <br /> 
-            <label for="country">Country:</label>
-            <input 
-                className={`${classes.borderRadius} ${classes.formInput}`} 
-                type="text" 
-                name="country" 
+            <input
+              className="border-radius form-input"
+              type="text"
+              name="dateOfBirth"
             />
             <br />
-            <label for="pass">Password:</label>           
+            <label for="telephone">Thelephone:</label>
             <input
-              className={`${classes.borderRadius} ${classes.formInput}`}
+              className="border-radius form-input"
+              type="text"
+              name="telephone"
+            />
+            <br />
+            <label for="country">Country:</label>
+            <input
+              className="border-radius form-input"
+              type="text"
+              name="country"
+            />
+            <br />
+            <label for="pass">Password:</label>
+            <input
+              className="border-radius form-input"
               type="password"
               name="pass"
             />
             <br />
-            <button className={`${classes.borderRadius} ${classes.buttonSolid}`} >REGISTER</button>
+            <button className="border-radius button-solid" >REGISTER</button>
           </form>
         </div>
-        <div className={classes.textHolder}>
-                <p>
-                     Or if you alrady have account {" "} <NavLink  exact  to="/">login</NavLink>         
-                </p>
-            </div>
+        <div className="text-holder">
+          <p>
+            Or if you alrady have account {" "} <NavLink exact to="/">login</NavLink>
+          </p>
         </div>
+      </div>
     </div>
   );
 }

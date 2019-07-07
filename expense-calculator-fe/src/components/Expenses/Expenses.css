@@ -212,7 +212,7 @@ td{
     margin: none;
     margin-left:-5px;
 }
-.tab-button:focus{
+.tab-button-clicked{
     background:  #C9E5DD ;
     color: #fff;
     font-size: 15px;

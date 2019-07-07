@@ -199,6 +199,8 @@ td{
     padding: 1em 2em;
     cursor: pointer;
     Color: #fff;
+    border: none;
+    
 }
 .tab-button{
     background: #1DD1A1;
@@ -335,6 +337,7 @@ h2{
 }
 .nav-link{
     text-decoration: none;
+    color: 576574;
     
 }
 .nav-link:visited{
