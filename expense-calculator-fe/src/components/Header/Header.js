@@ -1,14 +1,13 @@
 import React, { Component } from "react";
 import "../../css/Global.css";
 import { NavLink } from "react-router-dom";
-import { connect } from 'react-redux';
-import * as actionTypes from '../../store/actionTypes';
+import { connect } from "react-redux";
+import * as actionTypes from "../../store/actionTypes";
 
 class Header extends Component {
-
-  sectionStatusHandler = (status) => {
-    this.props.setSectionStatus(status)
-  }
+  sectionStatusHandler = status => {
+    this.props.setSectionStatus(status);
+  };
   render() {
     return (
       <>
@@ -18,16 +17,27 @@ class Header extends Component {
               {" "}
               <button
                 // onClick={() => this.sectionStatusHandler("products")}
-                className={this.props.sectionStatus === "products" ? "button-ghost-clicked border-radius" : "button-ghost border-radius"}>
+                className={
+                  this.props.sectionStatus === "products"
+                    ? "button-ghost-clicked border-radius"
+                    : "button-ghost border-radius"
+                }
+              >
                 PRODUCTS
               </button>
             </NavLink>
             <NavLink className="nav-link" exact to="/expenses">
               {" "}
               <button
-                // onClick={() => this.sectionStatusHandler("expenses")} 
-                className={this.props.sectionStatus === "expenses" ? "button-ghost-clicked border-radius" : "button-ghost border-radius"}>
-                EXPENSES</button>
+                // onClick={() => this.sectionStatusHandler("expenses")}
+                className={
+                  this.props.sectionStatus === "expenses"
+                    ? "button-ghost-clicked border-radius"
+                    : "button-ghost border-radius"
+                }
+              >
+                EXPENSES
+              </button>
             </NavLink>
           </div>
           <div className="avatar-holder">
@@ -47,14 +57,16 @@ class Header extends Component {
 const mapStateToProps = state => {
   return {
     sectionStatus: state.sectionStatus
-  }
-}
+  };
+};
 
 const mapDispatchToProps = dispatch => {
   return {
-    setSectionStatus: (status) => dispatch(actionTypes.setSectionStatus(status))
-  }
-}
+    setSectionStatus: status => dispatch(actionTypes.setSectionStatus(status))
+  };
+};
 
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Header);

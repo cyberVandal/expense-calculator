@@ -1,6 +1,6 @@
 import React from "react";
-import "../../css/Global.css"
-import { NavLink } from 'react-router-dom';
+import "../../css/Global.css";
+import { NavLink } from "react-router-dom";
 
 function Login() {
   return (
@@ -8,7 +8,7 @@ function Login() {
       <div className="column">
         <div className="main">
           <form>
-            <label for="email">E-mail:</label>
+            <label for="email">E-mail: </label>
             <input
               className="border-radius form-input"
               type="text"
@@ -27,12 +27,14 @@ function Login() {
                 value="SIGN IN"
               />
             </NavLink>
-
           </form>
         </div>
         <div className="text-holder">
           <p>
-            Or if you don't have account{" "} <NavLink exact to="/register">register</NavLink>
+            Or if you don't have account{" "}
+            <NavLink exact to="/register">
+              register
+            </NavLink>
           </p>
         </div>
       </div>
