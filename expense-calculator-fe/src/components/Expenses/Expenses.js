@@ -1,15 +1,22 @@
 import React, { Component } from "react";
 import "../../css/Global.css";
-import { NavLink } from "react-router-dom";
 import Header from "../Header/Header";
 import { connect } from "react-redux";
 import * as actionTypes from "../../store/actionTypes";
 import SelectorMonthly from "../SelektorMonthly/SelektorMonthly";
 import SelectorYearly from "../SelectorYearly/SelectorYearly";
+import TableRows from "../TableRows/TableRows";
 
 class Expenses extends Component {
   componentDidMount() {
     this.props.setSectionStatus("expenses");
+
+    var sum = 0;
+    for (let i = 0; i < this.props.products.length; i++) {
+      sum = sum + this.props.products[i].productPrice;
+    }
+
+    this.props.setSum(sum);
   }
 
   tabClickHandler = status => {
@@ -62,92 +69,16 @@ class Expenses extends Component {
                   <th>Product Price</th>
                   <th />
                 </tr>
-                <tr>
-                  <td>Alfreds Futterkiste</td>
-                  <td>Maria Anders</td>
-                  <td>Germany</td>
-                  <td>Germany</td>
-                  <td>Marie Bertrand</td>
-                  <td />
-                </tr>
-                <tr>
-                  <td>Berglunds snabbköp</td>
-                  <td>Christina Berglund</td>
-                  <td>Sweden</td>
-                  <td>Sweden</td>
-                  <td>Marie Bertrand</td>
-                  <td />
-                </tr>
-                <tr>
-                  <td>Centro comercial Moctezuma</td>
-                  <td>Francisco Chang</td>
-                  <td>Mexico</td>
-                  <td>Mexico</td>
-                  <td>Marie Bertrand</td>
-                  <td />
-                </tr>
-                <tr>
-                  <td>Ernst Handel</td>
-                  <td>Roland Mendel</td>
-                  <td>Austria</td>
-                  <td>Roland Mendel</td>
-                  <td>Marie Bertrand</td>
-                  <td />
-                </tr>
-                <tr>
-                  <td>Island Trading</td>
-                  <td>Helen Bennett</td>
-                  <td>UK</td>
-                  <td>UK</td>
-                  <td>Marie Bertrand</td>
-                  <td />
-                </tr>
-                <tr>
-                  <td>Königlich Essen</td>
-                  <td>Philip Cramer</td>
-                  <td>Germany</td>
-                  <td>Philip Cramer</td>
-                  <td>Marie Bertrand</td>
-                  <td />
-                </tr>
-                <tr>
-                  <td>Laughing Bacchus Winecellars</td>
-                  <td>Yoshi Tannamuri</td>
-                  <td>Canada</td>
-                  <td>Yoshi Tannamuri</td>
-                  <td>Marie Bertrand</td>
-                  <td />
-                </tr>
-                <tr>
-                  <td>Magazzini Alimentari Riuniti</td>
-                  <td>Giovanni Rovelli</td>
-                  <td>Italy</td>
-                  <td>Giovanni Rovelli</td>
-                  <td>Marie Bertrand</td>
-                  <td />
-                </tr>
-                <tr>
-                  <td>North/South</td>
-                  <td>Simon Crowther</td>
-                  <td>UK</td>
-                  <td>Simon Crowther</td>
-                  <td>Marie Bertrand</td>
-                  <td />
-                </tr>
-                <tr>
-                  <td>Paris spécialités</td>
-                  <td>Marie Bertrand</td>
-                  <td>France</td>
-                  <td>Marie Bertrand</td>
-                  <td>Marie Bertrand</td>
-                  <td />
-                </tr>
+                <TableRows
+                  products={this.props.products}
+                  sectionStatus={this.props.sectionStatus}
+                />
               </table>
             </div>
           </div>
         </div>
         <footer>
-          <h2>Total spent: 1250 den.</h2>
+          <h2>Total spent: {this.props.sum} den.</h2>
         </footer>
       </>
     );
@@ -155,7 +86,10 @@ class Expenses extends Component {
 }
 const mapStateToProps = state => {
   return {
-    tabStatus: state.tabStatus
+    products: state.products,
+    tabStatus: state.tabStatus,
+    sectionStatus: state.sectionStatus,
+    sum: state.sum
   };
 };
 
@@ -163,7 +97,8 @@ const mapDispatchToProps = dispatch => {
   return {
     removeProduct: id => dispatch(actionTypes.removeProduct(id)),
     setTabStatus: status => dispatch(actionTypes.setTabStatus(status)),
-    setSectionStatus: status => dispatch(actionTypes.setSectionStatus(status))
+    setSectionStatus: status => dispatch(actionTypes.setSectionStatus(status)),
+    setSum: sum => dispatch(actionTypes.setSum(sum))
   };
 };
 export default connect(
