@@ -5,10 +5,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 function EditDeleteIcon(props) {
   return (
     <>
-      <span>
+      <span className="edit-trash">
         <FontAwesomeIcon icon="edit" />
       </span>
-      <span style={{ marginLeft: "10px" }} onClick={props.click}>
+      <span
+        className="edit-trash"
+        style={{ marginLeft: "10px" }}
+        onClick={props.click}
+      >
         <FontAwesomeIcon icon="trash-alt" />
       </span>
     </>

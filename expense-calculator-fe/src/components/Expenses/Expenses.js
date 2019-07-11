@@ -37,8 +37,8 @@ class Expenses extends Component {
                 onClick={() => this.tabClickHandler("monthly")}
                 className={
                   this.props.tabStatus === "monthly"
-                    ? "tab-button-clicked border-radius"
-                    : "tab-button border-radius"
+                    ? "tab-button-clicked border-radius-left"
+                    : "tab-button border-radius-left"
                 }
               >
                 MONTHLY
@@ -47,8 +47,8 @@ class Expenses extends Component {
                 onClick={() => this.tabClickHandler("yearly")}
                 className={
                   this.props.tabStatus === "yearly"
-                    ? "tab-button-clicked border-radius"
-                    : "tab-button border-radius"
+                    ? "tab-button-clicked border-radius-right"
+                    : "tab-button border-radius-right"
                 }
               >
                 YEARLY

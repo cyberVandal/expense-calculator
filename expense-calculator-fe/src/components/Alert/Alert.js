@@ -1,6 +1,5 @@
 import React from "react";
 import "../../css/Global.css";
-import { NavLink } from "react-router-dom";
 
 function Alert(props) {
   return (
