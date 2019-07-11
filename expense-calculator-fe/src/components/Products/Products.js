@@ -6,6 +6,7 @@ import Header from "../Header/Header";
 import { connect } from "react-redux";
 import * as actionTypes from "../../store/actionTypes";
 import TableRows from "../TableRows/TableRows";
+import Alert from "../Alert/Alert";
 
 class Products extends Component {
   constructor(props) {
@@ -30,6 +31,9 @@ class Products extends Component {
   removeProductHandler = id => {
     console.log(id);
     this.props.removeProduct(id);
+  };
+  alertHandler = id => {
+    this.props.setAlertStatus(id);
   };
 
   render() {
@@ -66,35 +70,23 @@ class Products extends Component {
                 {/* Tuka Pocnuva Mapiranje ili dinamichna tabela */}
                 <TableRows
                   products={this.props.prods}
-                  click={this.removeProductHandler}
                   sectionStatus={this.props.sectionStatus}
+                  alertStatus={this.props.alertStatus}
+                  clickAlert={this.alertHandler}
                 />
               </table>
             </div>
           </div>
         </div>
-        <div id="non-something">
-          <div id="something" className="something">
-            <div className="alert-message">
-              <h2>Delete Product</h2>
-              <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum
-                eligendi at iusto vel numquam voluptatem odit modi maiores
-                recusandae accusantium.
-              </p>
-              <div className="alert-button-holder">
-                <a href="#non-something">
-                  <button class="delete-button-cancel border-radius">
-                    CANCEL
-                  </button>
-                </a>
-                <button className="delete-button-delete border-radius">
-                  DELETE
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+        {this.props.deleteId === 0 ? (
+          " "
+        ) : (
+          <Alert
+            clickDelete={this.removeProductHandler}
+            clickStatus={this.alertHandler}
+            id={this.props.deleteId}
+          />
+        )}
       </>
     );
   }
@@ -102,7 +94,9 @@ class Products extends Component {
 const mapStateToProps = state => {
   return {
     prods: state.products,
-    sectionStatus: state.sectionStatus
+    sectionStatus: state.sectionStatus,
+    alertStatus: state.alertStatus,
+    deleteId: state.deleteId
   };
 };
 
@@ -110,7 +104,8 @@ const mapDispatchToProps = dispatch => {
   return {
     init: products => dispatch(actionTypes.initGlobalState(products)),
     removeProduct: id => dispatch(actionTypes.removeProduct(id)),
-    setSectionStatus: status => dispatch(actionTypes.setSectionStatus(status))
+    setSectionStatus: status => dispatch(actionTypes.setSectionStatus(status)),
+    setAlertStatus: id => dispatch(actionTypes.setAlertStatus(id))
   };
 };
 

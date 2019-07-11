@@ -10,6 +10,8 @@ export const SET_SECTION_STATUS = "SET_SECTION_STATUS";
 
 export const SET_SUM = "SET_SUM";
 
+export const SET_ALERT_STATUS = "SET_ALERT_STATUS";
+
 export const initGlobalState = payload => {
   return {
     type: INIT_GLOBAL_STATE,
@@ -46,6 +48,12 @@ export const setSectionStatus = payload => {
 export const setSum = payload => {
   return {
     type: SET_SUM,
+    payload: payload
+  };
+};
+export const setAlertStatus = payload => {
+  return {
+    type: SET_ALERT_STATUS,
     payload: payload
   };
 };

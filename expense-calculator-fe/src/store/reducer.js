@@ -4,14 +4,16 @@ import {
   REMOVE_PRODUCT,
   SET_TAB_STATUS,
   SET_SECTION_STATUS,
-  SET_SUM
+  SET_SUM,
+  SET_ALERT_STATUS
 } from "./actionTypes";
 
 const initialState = {
   products: [],
   tabStatus: "monthly",
   sectionStatus: "products",
-  sum: 0
+  sum: 0,
+  deleteId: 0
 };
 
 const reducer = (state = initialState, action) => {
@@ -43,7 +45,8 @@ const reducer = (state = initialState, action) => {
       );
       return {
         ...state,
-        products: filtered
+        products: filtered,
+        deleteId: 0
       };
     case SET_TAB_STATUS:
       return {
@@ -59,6 +62,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         sum: action.payload
+      };
+    case SET_ALERT_STATUS:
+      return {
+        ...state,
+        deleteId: action.payload
       };
     default:
       return state;
