@@ -18,31 +18,31 @@ function CreateProduct() {
             <div className="create-product">
               <div className="create-product-left">
                 <form action="">
-                  <label for="email">Product Name:</label>
+                  <label for="productName">Product Name:</label>
                   <input
                     className="border-radius form-input"
                     type="text"
                     name="productName"
                   />
-                  <label for="email">Product Description:</label>
+                  <label for="productDescription">Product Description:</label>
                   <input
                     className="border-radius form-input"
                     type="text"
                     name="productDescription"
                   />
-                  <label for="email">Product Type:</label>
+                  <label for="productType">Product Type:</label>
                   <input
                     className="border-radius form-input"
                     type="text"
                     name="productType"
                   />
-                  <label for="email">Purchase Date:</label>
+                  <label for="purchaseDate">Purchase Date:</label>
                   <input
                     className="border-radius form-input"
                     type="text"
                     name="purchaseDate"
                   />
-                  <label for="email">Product Price:</label>
+                  <label for="productPrice">Product Price:</label>
                   <input
                     className="border-radius form-input"
                     type="text"

@@ -8,7 +8,7 @@ function Register() {
       <div className="column">
         <div className="main">
           <form>
-            <label for="email">First Name:</label>
+            <label for="firstName">First Name:</label>
             <input
               className="border-radius form-input"
               type="text"
