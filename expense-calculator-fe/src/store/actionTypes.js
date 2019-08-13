@@ -12,6 +12,10 @@ export const SET_SUM = "SET_SUM";
 
 export const SET_ALERT_STATUS = "SET_ALERT_STATUS";
 
+export const SET_TMP_EMAIL = "SET_TMP_EMAIL";
+
+export const SET_ERR_EMAIL = "SET_ERR_EMAIL";
+
 export const initGlobalState = payload => {
   return {
     type: INIT_GLOBAL_STATE,
@@ -54,6 +58,19 @@ export const setSum = payload => {
 export const setAlertStatus = payload => {
   return {
     type: SET_ALERT_STATUS,
+    payload: payload
+  };
+};
+export const setTmpEmail = payload => {
+  return {
+    type: SET_TMP_EMAIL,
+    payload: payload
+  };
+};
+
+export const setErrEmail = payload => {
+  return {
+    type: SET_ERR_EMAIL,
     payload: payload
   };
 };

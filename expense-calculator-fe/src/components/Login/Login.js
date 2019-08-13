@@ -2,14 +2,19 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import "../../css/Global.css";
 import { NavLink } from "react-router-dom";
+import * as actionTypes from "../../store/actionTypes";
 
 class Login extends Component {
-  handleName = () => {};
+  handleName = () => { };
   handleChangeName = e => {
+    console.log("TMP EMAIL : " + this.props.tmpEmail + "  ERR EMAIL : " + this.props.errEmail);
     if (e.target.value.length <= 8) {
-      this.setState({ errName: "", tmpName: e.target.value });
+      this.props.setTmpEmail(e.target.value);
+      this.props.setErrEmail("");
+      // this.setState({ errName: "", tmpName: e.target.value });
     } else {
-      this.setState({ errName: "8 character is max" });
+      this.props.setErrEmail("8 character is max");
+      // this.setState({ errName: "8 character is max" });
     }
   };
   render() {
@@ -23,7 +28,13 @@ class Login extends Component {
                 className="border-radius form-input"
                 type="text"
                 name="email"
+                onChange={this.handleChangeName}
+                value={this.props.tmpEmail}
               />
+              <br />
+              {
+                this.props.errEmail !== '' ? <p>{this.props.errEmail}</p> : null
+              }
               <label for="pass">Password:</label>
               <input
                 className="border-radius form-input"
@@ -55,7 +66,8 @@ class Login extends Component {
 }
 const mapStateToProps = state => {
   return {
-    prods: state.products,
+    tmpEmail: state.tmpEmail,
+    errEmail: state.errEmail,
     sectionStatus: state.sectionStatus,
     alertStatus: state.alertStatus,
     deleteId: state.deleteId
@@ -64,6 +76,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    setTmpEmail: tmp => dispatch(actionTypes.setTmpEmail(tmp)),
+    setErrEmail: err => dispatch(actionTypes.setErrEmail(err)),
     init: products => dispatch(actionTypes.initGlobalState(products)),
     removeProduct: id => dispatch(actionTypes.removeProduct(id)),
     setSectionStatus: status => dispatch(actionTypes.setSectionStatus(status)),

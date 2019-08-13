@@ -5,7 +5,9 @@ import {
   SET_TAB_STATUS,
   SET_SECTION_STATUS,
   SET_SUM,
-  SET_ALERT_STATUS
+  SET_ALERT_STATUS,
+  SET_TMP_EMAIL,
+  SET_ERR_EMAIL
 } from "./actionTypes";
 
 const initialState = {
@@ -13,7 +15,10 @@ const initialState = {
   tabStatus: "monthly",
   sectionStatus: "products",
   sum: 0,
-  deleteId: 0
+  deleteId: 0,
+  tmpEmail: "",
+  errEmail: ""
+
 };
 
 const reducer = (state = initialState, action) => {
@@ -67,6 +72,16 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         deleteId: action.payload
+      };
+    case SET_TMP_EMAIL:
+      return {
+        ...state,
+        tmpEmail: action.payload
+      };
+    case SET_ERR_EMAIL:
+      return {
+        ...state,
+        errEmail: action.payload
       };
     default:
       return state;
