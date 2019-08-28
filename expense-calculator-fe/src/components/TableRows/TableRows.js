@@ -7,17 +7,17 @@ function TableRow(props) {
     <>
       {props.products.map(product => (
         <tr key={product.id}>
-          <td>{product.productName}</td>
-          <td>{product.productType}</td>
-          <td>{product.productDescription}</td>
-          <td>{product.purchaseDate}</td>
-          <td>{product.productPrice}</td>
+          <td>{product.product_name}</td>
+          <td>{product.product_type}</td>
+          <td>{product.product_description}</td>
+          <td>{product.purchase_date}</td>
+          <td>{product.product_price}</td>
           <td>
             {props.sectionStatus === "products" ? (
               <EditDeleteIcon click={() => props.clickAlert(product.id)} />
             ) : (
-              " "
-            )}
+                " "
+              )}
           </td>
         </tr>
       ))}

@@ -1,4 +1,5 @@
 const express = require('express');
+var cors = require('cors');
 const bodyParser = require('body-parser');
 
 var config = require('./config/index');
@@ -7,7 +8,10 @@ var products = require('./handlers/products_handler');
 
 db.Init();
 var api = express();
+
 api.use(bodyParser.json());
+api.use(cors());
+
 
 api.get('/api/products', products.getAllProducts);
 api.post('/api/products', products.addProduct);

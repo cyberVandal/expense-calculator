@@ -7,7 +7,9 @@ import {
   SET_SUM,
   SET_ALERT_STATUS,
   SET_TMP_EMAIL,
-  SET_ERR_EMAIL
+  SET_ERR_EMAIL,
+  SET_TMP_PRODNAME,
+  SET_ERR_TMP_PRODNAME
 } from "./actionTypes";
 
 const initialState = {
@@ -17,7 +19,13 @@ const initialState = {
   sum: 0,
   deleteId: 0,
   tmpEmail: "",
-  errEmail: ""
+  errEmail: "",
+  tmpProdName: "",
+  errTmpProdName: "",
+  tmpProdDescription: "",
+  tmpProdType: "",
+  tmpPurchaseDate: "",
+  tmpProdPrice: 0
 
 };
 
@@ -83,6 +91,18 @@ const reducer = (state = initialState, action) => {
         ...state,
         errEmail: action.payload
       };
+
+    case SET_ERR_TMP_PRODNAME:
+      return {
+        ...state,
+        errTmpProdName: action.payload
+      };
+    case SET_TMP_PRODNAME:
+      return {
+        ...state,
+        tmpProdName: action.payload
+      };
+
     default:
       return state;
   }

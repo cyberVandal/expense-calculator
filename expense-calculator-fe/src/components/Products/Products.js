@@ -20,8 +20,8 @@ class Products extends Component {
     this.props.setSectionStatus("products");
 
     if (this.props.prods.length === 0) {
-      axios.get("http://localhost:8080/products").then(response => {
-        this.props.init(response.data.products);
+      axios.get("http://localhost:8080/api/products").then(response => {
+        this.props.init(response.data);
       });
     } else {
       // this.setState({ products: this.props.prods, filtered: this.props.prods });
@@ -81,12 +81,12 @@ class Products extends Component {
         {this.props.deleteId === 0 ? (
           " "
         ) : (
-          <Alert
-            clickDelete={this.removeProductHandler}
-            clickStatus={this.alertHandler}
-            id={this.props.deleteId}
-          />
-        )}
+            <Alert
+              clickDelete={this.removeProductHandler}
+              clickStatus={this.alertHandler}
+              id={this.props.deleteId}
+            />
+          )}
       </>
     );
   }
