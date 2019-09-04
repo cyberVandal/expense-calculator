@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Redirect } from 'react-router-dom';
 import { connect } from "react-redux";
 import axios from "axios";
 import "../../css/Global.css";
@@ -9,68 +10,101 @@ import * as actionTypes from "../../store/actionTypes";
 
 
 class CreateProduct extends Component {
+  state = {
+    clicked: false,
+    tmpProdName: "",
+    errTmpProdName: "",
+    tmpProdDescription: "",
+    errTmpProdDescription: "",
+    tmpProdType: "",
+    errTmpProdType: "",
+    tmpPurchaseDate: "dd-mm-yy",
+    errTmpPurchaseDate: "",
+    tmpProdPrice: 0,
+    errTmpProdPrice: ""
+  }
 
   handleChangeProdName = e => {
-    // console.log("TMP PROD NAME" + this.props.tmpEmail + "  ERR EMAIL : " + this.props.errEmail);
     if (e.target.value.length <= 8) {
-      this.props.setTmpProdName(e.target.value);
-      this.props.setErrTmpProdName("");
-      // this.setState({ errName: "", tmpName: e.target.value });
+      this.setState({ tmpProdName: e.target.value });
+      this.setState({ errTmpProdName: "" });
+      // this.props.setTmpProdName(e.target.value);
+      // this.props.setErrTmpProdName("");
     } else {
-      this.props.setErrTmpProdName("8 character is max");
-      // this.setState({ errName: "8 character is max" });
+      this.setState({ errTmpProdName: "8 character is max" });
+      // this.props.setErrTmpProdName("8 character is max");
     }
   };
+
   handleChangeProdDescription = e => {
-    // console.log("TMP PROD NAME" + this.props.tmpEmail + "  ERR EMAIL : " + this.props.errEmail);
-    if (e.target.value.length <= 8) {
-      this.props.setTmpProdDescription(e.target.value);
-      //this.props.setErrTmpProdName("");
-      // this.setState({ errName: "", tmpName: e.target.value });
+    if (e.target.value.length <= 20) {
+      this.setState({ tmpProdDescription: e.target.value });
+      this.setState({ errTmpProdDescription: "" });
     } else {
-      //this.props.setErrTmpProdName("8 character is max");
-      // this.setState({ errName: "8 character is max" });
+      this.setState({ errTmpProdDescription: "20 character is max" });
+    }
+  };
+  handleChangeProdType = e => {
+    if (e.target.value.length <= 10) {
+      this.setState({ tmpProdType: e.target.value });
+      this.setState({ errTmpProdType: "" });
+    } else {
+      this.setState({ errTmpProdType: "10 character is max" });
+    }
+  };
+  //DA SE DOSREDI DATUM DA E VALIDEN 
+  handleChangePurchaseDate = e => {
+    if (e.target.value.length <= 8) {
+      this.setState({ tmpPurchaseDate: e.target.value });
+      this.setState({ errTmpPurchaseDate: "" });
+    } else {
+      this.setState({ errTmpPurchaseDate: "8 character is max" });
+    }
+  };
+
+  handleChangeProdPrice = e => {
+    if (isNaN(e.target.value.length)) {
+      this.setState({ errTmpProdPrice: "Value must be Number" });
+
+    } else {
+      this.setState({ tmpProdPrice: e.target.value });
+      this.setState({ errTmpProdPrice: "" });
     }
   };
 
   handleOnSubmit = (e) => {
-    console.log("KLIKNATO GORE")
+
     e.preventDefault();
-    // var bodyFormData = new FormData();
-    // bodyFormData.set('product_name', 'Jogurt');
-    // bodyFormData.set('product_description', 'Mlechen Proizvod');
-    // bodyFormData.set('product_type', 'Mleko Kiselo');
-    // bodyFormData.set('purchase_date', '20.07.2019');
-    // bodyFormData.set('product_price', 400);
     var bodyFormData = {
-      "product_name": this.props.tmpProdName,
-      "product_description": "Alkoholen Pijalok",
-      "product_type": "Mleko Kiselo",
-      "purchase_date": "20.07.2019",
-      "product_price": 600
+      "product_name": this.state.tmpProdName,
+      "product_description": this.state.tmpProdDescription,
+      "product_type": this.state.tmpProdType,
+      "purchase_date": this.state.tmpPurchaseDate,
+      "product_price": this.state.tmpProdPrice
     }
-
-
     axios.post('http://localhost:8080/api/products', bodyFormData);
-    // axios({
-    //   method: 'post',
-    //   url: 'http://localhost:8080/api/products',
-    //   data: bodyFormData,
-    //   config: { headers: { 'Content-Type': 'multipart/form-data' } }
-    // })
-    //   .then(function (response) {
-    //     //handle success
-    //     console.log(response);
-    //   })
-    //   .catch(function (response) {
-    //     //handle error
-    //     console.log(response);
-    //   });
 
-    console.log("Kliknato e !!!")
+    this.setState({ errTmpProdName: "" });
+    this.setState({ errTmpProdDescription: "" });
+    this.setState({ errTmpProdType: "" });
+    this.setState({ errTmpPurchaseDate: "" });
+    this.setState({ errTmpProdPrice: "" });
+
+    //Refresh of products to show on products component
+    axios.get("http://localhost:8080/api/products")
+      .then(response => {
+        this.props.init(response.data);
+      });
+    this.setState({ clicked: true });
+
   }
 
   render() {
+
+    //Check and redirect to products component
+    if (this.state.clicked === true) {
+      return <Redirect to='/products' />
+    }
     return (
       <>
         <Header />
@@ -90,11 +124,11 @@ class CreateProduct extends Component {
                       type="text"
                       name="productName"
                       onChange={this.handleChangeProdName}
-                      value={this.props.tmpProdName}
+                      value={this.state.tmpProdName}
                     />
                     <br />
                     {
-                      this.props.errTmpProdName !== '' ? <p>{this.props.errTmpProdName}</p> : null
+                      this.state.errTmpProdName !== '' ? <p>{this.state.errTmpProdName}</p> : null
                     }
 
                     <label for="productDescription">Product Description:</label>
@@ -103,26 +137,49 @@ class CreateProduct extends Component {
                       type="text"
                       name="productDescription"
                       onChange={this.handleChangeProdDescription}
-                      value={this.props.tmpProdDescription}
+                      value={this.state.tmpProdDescription}
                     />
+                    <br />
+                    {
+                      this.state.errTmpProdDescription !== '' ? <p>{this.state.errTmpProdDescription}</p> : null
+                    }
+
                     <label for="productType">Product Type:</label>
                     <input
                       className="border-radius form-input"
                       type="text"
                       name="productType"
+                      onChange={this.handleChangeProdType}
+                      value={this.state.tmpProdType}
                     />
+                    <br />
+                    {
+                      this.state.errTmpProdType !== '' ? <p>{this.state.errTmpProdType}</p> : null
+                    }
                     <label for="purchaseDate">Purchase Date:</label>
                     <input
                       className="border-radius form-input"
                       type="text"
                       name="purchaseDate"
+                      onChange={this.handleChangePurchaseDate}
+                      value={this.state.tmpPurchaseDate}
                     />
+                    <br />
+                    {
+                      this.state.errTmpPurchaseDate !== '' ? <p>{this.state.errTmpPurchaseDate}</p> : null
+                    }
                     <label for="productPrice">Product Price:</label>
                     <input
                       className="border-radius form-input"
                       type="text"
                       name="productPrice"
+                      onChange={this.handleChangeProdPrice}
+                      value={this.state.tmpProdPrice}
                     />
+                    <br />
+                    {
+                      this.state.errTmpProdPrice !== '' ? <p>{this.state.errTmpProdPrice}</p> : null
+                    }
                     <button className="border-radius button-solid">
                       CREATE PRODUCT
                     </button>
@@ -153,9 +210,10 @@ class CreateProduct extends Component {
 
 const mapStateToProps = state => {
   return {
-    tmpProdName: state.tmpProdName,
-    errTmpProdName: state.errTmpProdName,
-    tmpProdDescription: state.tmpProdDescription
+    // tmpProdName: state.tmpProdName,
+    // errTmpProdName: state.errTmpProdName,
+    // tmpProdDescription: state.tmpProdDescription,
+    // errTmpProdDescription: state.errTmpProdDescription
     // sectionStatus: state.sectionStatus,
     // alertStatus: state.alertStatus,
     // deleteId: state.deleteId
@@ -164,9 +222,12 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setTmpProdName: tmp => dispatch(actionTypes.setTmpProdName(tmp)),
-    setErrTmpProdName: err => dispatch(actionTypes.setErrTmpProdName(err))
-    // init: products => dispatch(actionTypes.initGlobalState(products)),
+
+    init: products => dispatch(actionTypes.initGlobalState(products))
+    // setTmpProdName: tmp => dispatch(actionTypes.setTmpProdName(tmp)),
+    // setErrTmpProdName: err => dispatch(actionTypes.setErrTmpProdName(err)),
+    // setTmpProdDescription: tmp1 => dispatch(actionTypes.setTmpProdDescription(tmp1)),
+    // setErrTmpProdDescription: err1 => dispatch(actionTypes.setErrTmpProdDescription(err1)),
     // removeProduct: id => dispatch(actionTypes.removeProduct(id)),
     // setSectionStatus: status => dispatch(actionTypes.setSectionStatus(status)),
     // setAlertStatus: id => dispatch(actionTypes.setAlertStatus(id))

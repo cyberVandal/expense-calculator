@@ -14,7 +14,7 @@ function TableRow(props) {
           <td>{product.product_price}</td>
           <td>
             {props.sectionStatus === "products" ? (
-              <EditDeleteIcon click={() => props.clickAlert(product.id)} />
+              <EditDeleteIcon click={() => props.clickAlert(product._id)} />
             ) : (
                 " "
               )}

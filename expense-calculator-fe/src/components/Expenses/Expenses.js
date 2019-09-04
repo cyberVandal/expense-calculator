@@ -13,7 +13,7 @@ class Expenses extends Component {
 
     var sum = 0;
     for (let i = 0; i < this.props.products.length; i++) {
-      sum = sum + this.props.products[i].productPrice;
+      sum = sum + this.props.products[i].product_price;
     }
 
     this.props.setSum(sum);
@@ -56,8 +56,8 @@ class Expenses extends Component {
               {this.props.tabStatus === "monthly" ? (
                 <SelectorMonthly />
               ) : (
-                <SelectorYearly />
-              )}
+                  <SelectorYearly />
+                )}
             </div>
             <div className="dashboard-container-table">
               <table>

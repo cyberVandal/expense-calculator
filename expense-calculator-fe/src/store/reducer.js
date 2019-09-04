@@ -7,9 +7,7 @@ import {
   SET_SUM,
   SET_ALERT_STATUS,
   SET_TMP_EMAIL,
-  SET_ERR_EMAIL,
-  SET_TMP_PRODNAME,
-  SET_ERR_TMP_PRODNAME
+  SET_ERR_EMAIL
 } from "./actionTypes";
 
 const initialState = {
@@ -19,13 +17,7 @@ const initialState = {
   sum: 0,
   deleteId: 0,
   tmpEmail: "",
-  errEmail: "",
-  tmpProdName: "",
-  errTmpProdName: "",
-  tmpProdDescription: "",
-  tmpProdType: "",
-  tmpPurchaseDate: "",
-  tmpProdPrice: 0
+  errEmail: ""
 
 };
 
@@ -53,12 +45,8 @@ const reducer = (state = initialState, action) => {
         myCart: newCartProducts
       };
     case REMOVE_PRODUCT:
-      const filtered = state.products.filter(
-        prod => prod.id !== action.payload
-      );
       return {
         ...state,
-        products: filtered,
         deleteId: 0
       };
     case SET_TAB_STATUS:
@@ -90,17 +78,6 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         errEmail: action.payload
-      };
-
-    case SET_ERR_TMP_PRODNAME:
-      return {
-        ...state,
-        errTmpProdName: action.payload
-      };
-    case SET_TMP_PRODNAME:
-      return {
-        ...state,
-        tmpProdName: action.payload
       };
 
     default:

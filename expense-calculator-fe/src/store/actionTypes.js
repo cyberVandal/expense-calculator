@@ -16,9 +16,7 @@ export const SET_TMP_EMAIL = "SET_TMP_EMAIL";
 
 export const SET_ERR_EMAIL = "SET_ERR_EMAIL";
 
-export const SET_TMP_PRODNAME = "SET_TMP_PRODNAME";
 
-export const SET_ERR_TMP_PRODNAME = "SET_ERR_TMP_PRODNAME";
 
 export const initGlobalState = payload => {
   return {
@@ -79,15 +77,3 @@ export const setErrEmail = payload => {
   };
 };
 
-export const setErrTmpProdName = payload => {
-  return {
-    type: SET_ERR_TMP_PRODNAME,
-    payload: payload
-  };
-};
-export const setTmpProdName = payload => {
-  return {
-    type: SET_TMP_PRODNAME,
-    payload: payload
-  };
-};
