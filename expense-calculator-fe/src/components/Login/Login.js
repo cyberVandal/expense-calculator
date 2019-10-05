@@ -1,35 +1,76 @@
 import React, { Component } from "react";
+import axios from "axios";
 import { connect } from "react-redux";
 import "../../css/Global.css";
 import { NavLink } from "react-router-dom";
 import * as actionTypes from "../../store/actionTypes";
 
 class Login extends Component {
-  handleName = () => { };
-  handleChangeName = e => {
-    console.log("TMP EMAIL : " + this.props.tmpEmail + "  ERR EMAIL : " + this.props.errEmail);
-    if (e.target.value.length <= 8) {
-      this.props.setTmpEmail(e.target.value);
-      this.props.setErrEmail("");
-      // this.setState({ errName: "", tmpName: e.target.value });
-    } else {
-      this.props.setErrEmail("8 character is max");
-      // this.setState({ errName: "8 character is max" });
+
+  constructor() {
+    super();
+    //Set default message
+    this.state = {
+      email: "",
+      password: ""
     }
+  }
+  handleChangeEmail = e => {
+
+
+    this.setState({ email: e.target.value });
+
   };
+
+  handleChangePass = e => {
+
+    this.setState({ password: e.target.value });
+  };
+
+  onSubmit = (event) => {
+    event.preventDefault();
+    var bodyFormData = {
+      "email": this.state.tmpEmail,
+      "password": this.state.tmpPass
+    }
+    // axios.post('http://localhost:8080/api/authenticate', bodyFormData)
+    fetch('http://localhost:8080/api/authenticate', {
+      method: 'POST',
+      body: JSON.stringify(this.state),
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'include'
+    })
+      .then(res => {
+        if (res.status === 200) {
+          console.log("USPESHNO");
+          console.log(res.cookies);
+          this.props.history.push('/');
+        } else {
+          const error = new Error(res.error);
+          throw error;
+        }
+      })
+      .catch(err => {
+        console.error(err);
+        alert('Error logging in please try again Goran');
+      });
+  };
+
   render() {
     return (
       <div className="wrapper">
         <div className="column">
           <div className="main">
-            <form>
+            <form onSubmit={this.onSubmit}>
               <label for="email">E-mail: </label>
               <input
                 className="border-radius form-input"
                 type="text"
                 name="email"
-                onChange={this.handleChangeName}
-                value={this.props.tmpEmail}
+                onChange={this.handleChangeEmail}
+                value={this.state.tmpEmail}
               />
               <br />
               {
@@ -40,17 +81,19 @@ class Login extends Component {
                 className="border-radius form-input"
                 type="password"
                 name="pass"
-                onChange={this.handleName}
+                onChange={this.handleChangePass}
               />
-              <NavLink exact to="/products">
-                <input
-                  className="border-radius button-solid"
-                  type="submit"
-                  value="SIGN IN"
-                />
-              </NavLink>
+
+              <input
+                className="border-radius button-solid"
+                type="submit"
+                value="SIGN IN"
+              />
+
             </form>
+
           </div>
+
           <div className="text-holder">
             <p>
               Or if you don't have account{" "}
@@ -64,28 +107,6 @@ class Login extends Component {
     );
   }
 }
-const mapStateToProps = state => {
-  return {
-    tmpEmail: state.tmpEmail,
-    errEmail: state.errEmail,
-    sectionStatus: state.sectionStatus,
-    alertStatus: state.alertStatus,
-    deleteId: state.deleteId
-  };
-};
 
-const mapDispatchToProps = dispatch => {
-  return {
-    setTmpEmail: tmp => dispatch(actionTypes.setTmpEmail(tmp)),
-    setErrEmail: err => dispatch(actionTypes.setErrEmail(err)),
-    init: products => dispatch(actionTypes.initGlobalState(products)),
-    removeProduct: id => dispatch(actionTypes.removeProduct(id)),
-    setSectionStatus: status => dispatch(actionTypes.setSectionStatus(status)),
-    setAlertStatus: id => dispatch(actionTypes.setAlertStatus(id))
-  };
-};
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Login);
+export default Login;
