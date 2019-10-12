@@ -18,10 +18,28 @@ class CreateProduct extends Component {
     errTmpProdDescription: "",
     tmpProdType: "",
     errTmpProdType: "",
-    tmpPurchaseDate: "dd-mm-yy",
+    tmpPurchaseDate: "",
     errTmpPurchaseDate: "",
     tmpProdPrice: 0,
-    errTmpProdPrice: ""
+    errTmpProdPrice: "",
+    date: "",
+    purchaseDate: "",
+    data: []
+  }
+
+
+  componentDidMount() {
+    this.getDate();
+    var date = { currentTime: new Date().toLocaleString() };
+    console.log(date);
+  }
+
+  componentWillUnmount() {
+    axios.get("http://localhost:8080/api/products")
+      .then(response => {
+        this.props.init(response.data);
+      });
+
   }
 
   handleChangeProdName = e => {
@@ -54,13 +72,22 @@ class CreateProduct extends Component {
   };
   //DA SE DOSREDI DATUM DA E VALIDEN 
   handleChangePurchaseDate = e => {
-    if (e.target.value.length <= 8) {
-      this.setState({ tmpPurchaseDate: e.target.value });
-      this.setState({ errTmpPurchaseDate: "" });
-    } else {
-      this.setState({ errTmpPurchaseDate: "8 character is max" });
-    }
+    // if (e.target.value.length <= 8) {
+    this.setState({ tmpPurchaseDate: e.target.value });
+    this.setState({ purchaseDate: new Date(e.target.value).toJSON().slice(0, 10).replace(/-/g, '/') })
+    this.setState({ errTmpPurchaseDate: "" });
+
+    // } else {
+    //   this.setState({ errTmpPurchaseDate: "8 character is max" });
+    //}
   };
+  getDate = () => {
+    var date = { currentTime: new Date().toLocaleString() };
+
+    this.setState({
+      date: date
+    });
+  }
 
   handleChangeProdPrice = e => {
     if (isNaN(e.target.value.length)) {
@@ -79,7 +106,7 @@ class CreateProduct extends Component {
       "product_name": this.state.tmpProdName,
       "product_description": this.state.tmpProdDescription,
       "product_type": this.state.tmpProdType,
-      "purchase_date": this.state.tmpPurchaseDate,
+      "purchase_date": this.state.purchaseDate,
       "product_price": this.state.tmpProdPrice
     }
     axios.post('http://localhost:8080/api/products', bodyFormData);
@@ -91,12 +118,13 @@ class CreateProduct extends Component {
     this.setState({ errTmpProdPrice: "" });
 
     //Refresh of products to show on products component
-    axios.get("http://localhost:8080/api/products")
-      .then(response => {
-        this.props.init(response.data);
-      });
+    // axios.get("http://localhost:8080/api/products")
+    //   .then(response => {
+    //     this.props.init(response.data);
+    //   });
     this.setState({ clicked: true });
 
+    //this.props.history.push('/products');
   }
 
   render() {
@@ -159,8 +187,11 @@ class CreateProduct extends Component {
                     <label for="purchaseDate">Purchase Date:</label>
                     <input
                       className="border-radius form-input"
-                      type="text"
+                      type="date"
                       name="purchaseDate"
+
+                      max="2019-10-12"
+                      required
                       onChange={this.handleChangePurchaseDate}
                       value={this.state.tmpPurchaseDate}
                     />

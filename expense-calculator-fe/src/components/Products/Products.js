@@ -20,16 +20,17 @@ class Products extends Component {
     this.props.setSectionStatus("products");
 
     //if (this.props.prods.length === 0) {
-    axios.get("http://localhost:8080/api/products").then(response => {
-      this.props.init(response.data);
-    });
+    axios.get("http://localhost:8080/api/products")
+      .then(response => {
+        this.props.init(response.data);
+      });
     //} else {
     // this.setState({ products: this.props.prods, filtered: this.props.prods });
     //}
   }
 
   removeProductHandler = id => {
-    console.log(id);
+
 
     axios.delete(`http://localhost:8080/api/products/${id}`);
 
@@ -37,6 +38,7 @@ class Products extends Component {
     axios.get("http://localhost:8080/api/products")
       .then(response => {
         this.props.init(response.data);
+
       });
   };
 
@@ -94,6 +96,8 @@ class Products extends Component {
               clickStatus={this.alertHandler}
               id={this.props.deleteId}
             />
+
+
           )}
       </>
     );

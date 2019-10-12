@@ -16,12 +16,14 @@ export const SET_TMP_EMAIL = "SET_TMP_EMAIL";
 
 export const SET_ERR_EMAIL = "SET_ERR_EMAIL";
 
+export const SET_USER_NAME = "SET_USER_NAME";
+
 
 
 export const initGlobalState = payload => {
   return {
     type: INIT_GLOBAL_STATE,
-    products: payload
+    payload: payload
   };
 };
 
@@ -73,6 +75,13 @@ export const setTmpEmail = payload => {
 export const setErrEmail = payload => {
   return {
     type: SET_ERR_EMAIL,
+    payload: payload
+  };
+};
+
+export const setUserName = payload => {
+  return {
+    type: SET_USER_NAME,
     payload: payload
   };
 };

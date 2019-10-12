@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import axios from "axios";
+import { Redirect } from 'react-router-dom';
 import { connect } from "react-redux";
+import axios from "axios";
 import "../../css/Global.css";
 import { NavLink } from "react-router-dom";
 import * as actionTypes from "../../store/actionTypes";
@@ -11,10 +12,12 @@ class Login extends Component {
     super();
     //Set default message
     this.state = {
+      clicked: false,
       email: "",
       password: ""
     }
   }
+
   handleChangeEmail = e => {
 
 
@@ -29,24 +32,26 @@ class Login extends Component {
 
   onSubmit = (event) => {
     event.preventDefault();
+    console.log(this.state.email);
+    //this.setState({ clicked: true });
     var bodyFormData = {
-      "email": this.state.tmpEmail,
-      "password": this.state.tmpPass
+      "email": this.state.email,
+      "password": this.state.password
     }
-    // axios.post('http://localhost:8080/api/authenticate', bodyFormData)
-    fetch('http://localhost:8080/api/authenticate', {
-      method: 'POST',
-      body: JSON.stringify(this.state),
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      credentials: 'include'
-    })
+    // fetch('http://localhost:8080/api/authenticate', {
+    //   method: 'POST',
+    //   body: JSON.stringify(this.state),
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   },
+    //   credentials: 'include'
+    // })
+    axios.post('http://127.0.0.1:8080/api/authenticate', bodyFormData)
       .then(res => {
         if (res.status === 200) {
           console.log("USPESHNO");
-          console.log(res.cookies);
-          this.props.history.push('/');
+          this.props.setUserName(this.state.email);
+          this.props.history.push('/products');
         } else {
           const error = new Error(res.error);
           throw error;
@@ -59,6 +64,9 @@ class Login extends Component {
   };
 
   render() {
+    // if (this.state.clicked === true) {
+    //   return <Redirect to='/products' />
+    // }
     return (
       <div className="wrapper">
         <div className="column">
@@ -70,7 +78,7 @@ class Login extends Component {
                 type="text"
                 name="email"
                 onChange={this.handleChangeEmail}
-                value={this.state.tmpEmail}
+                value={this.state.email}
               />
               <br />
               {
@@ -108,5 +116,23 @@ class Login extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    prods: state.products,
+    sectionStatus: state.sectionStatus,
+    alertStatus: state.alertStatus,
+    deleteId: state.deleteId
+  };
+};
 
-export default Login;
+const mapDispatchToProps = dispatch => {
+  return {
+    setUserName: user => dispatch(actionTypes.setUserName(user))
+
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Login);

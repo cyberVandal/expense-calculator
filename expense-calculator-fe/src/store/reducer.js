@@ -7,7 +7,8 @@ import {
   SET_SUM,
   SET_ALERT_STATUS,
   SET_TMP_EMAIL,
-  SET_ERR_EMAIL
+  SET_ERR_EMAIL,
+  SET_USER_NAME
 } from "./actionTypes";
 
 const initialState = {
@@ -17,7 +18,8 @@ const initialState = {
   sum: 0,
   deleteId: 0,
   tmpEmail: "",
-  errEmail: ""
+  errEmail: "",
+  userName: "Goran Mitkovski"
 
 };
 
@@ -26,7 +28,7 @@ const reducer = (state = initialState, action) => {
     case INIT_GLOBAL_STATE:
       return {
         ...state,
-        products: action.products
+        products: action.payload
       };
     case ADD_TO_CART:
       const newCartProducts = [...state.myCart];
@@ -78,6 +80,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         errEmail: action.payload
+      };
+    case SET_USER_NAME:
+      return {
+        ...state,
+        userName: action.payload
       };
 
     default:

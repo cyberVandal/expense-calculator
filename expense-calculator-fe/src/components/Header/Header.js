@@ -46,7 +46,7 @@ class Header extends Component {
               src="https://cdn.pixabay.com/photo/2018/01/15/07/51/woman-3083376__340.jpg"
               alt="Smiley face"
             />
-            <span>Milena Spasovska</span>
+            <span>{this.props.user}</span>
           </div>
         </div>
       </>
@@ -56,7 +56,8 @@ class Header extends Component {
 
 const mapStateToProps = state => {
   return {
-    sectionStatus: state.sectionStatus
+    sectionStatus: state.sectionStatus,
+    user: state.userName
   };
 };
 
