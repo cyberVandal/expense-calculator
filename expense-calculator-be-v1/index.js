@@ -22,13 +22,7 @@ var api = express();
 
 api.use(bodyParser.json());
 api.use(cookieParser());
-api.use(cors(
-
-    {
-        origin: 'http://127.0.0.1:3000',
-        credentials: true
-    }
-));
+api.use(cors());
 
 
 api.get('/api/products', products.getAllProducts);
@@ -97,7 +91,7 @@ api.post('/api/authenticate', function (req, res) {
                     const token = jwt.sign(payload, secret, {
                         expiresIn: 86400 * 30
                     });
-                    res.cookie('token', token, { httpOnly: true })
+                    res.cookie('token', token, { httpOnly: true, secure: true, sameSite: true })
                         .sendStatus(200);
                 }
             });

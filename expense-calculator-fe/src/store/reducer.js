@@ -8,7 +8,8 @@ import {
   SET_ALERT_STATUS,
   SET_TMP_EMAIL,
   SET_ERR_EMAIL,
-  SET_USER_NAME
+  SET_USER_NAME,
+  SET_USER_ID
 } from "./actionTypes";
 
 const initialState = {
@@ -19,7 +20,8 @@ const initialState = {
   deleteId: 0,
   tmpEmail: "",
   errEmail: "",
-  userName: "Goran Mitkovski"
+  userName: "Goran Mitkovski",
+  userI: 0
 
 };
 
@@ -86,6 +88,13 @@ const reducer = (state = initialState, action) => {
         ...state,
         userName: action.payload
       };
+      case SET_USER_ID:
+      return {
+        ...state,
+        userId: action.payload
+      };
+
+      
 
     default:
       return state;

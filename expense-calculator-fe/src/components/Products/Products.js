@@ -19,14 +19,17 @@ class Products extends Component {
   componentDidMount() {
     this.props.setSectionStatus("products");
 
-    //if (this.props.prods.length === 0) {
     axios.get("http://localhost:8080/api/products")
       .then(response => {
         this.props.init(response.data);
       });
-    //} else {
-    // this.setState({ products: this.props.prods, filtered: this.props.prods });
-    //}
+   
+  }
+  componentDidUpdate(){
+    axios.get("http://localhost:8080/api/products")
+      .then(response => {
+        this.props.init(response.data);
+      });
   }
 
   removeProductHandler = id => {
@@ -35,11 +38,11 @@ class Products extends Component {
     axios.delete(`http://localhost:8080/api/products/${id}`);
 
     this.props.removeProduct(id);
-    axios.get("http://localhost:8080/api/products")
-      .then(response => {
-        this.props.init(response.data);
+    // axios.get("http://localhost:8080/api/products")
+    //   .then(response => {
+    //     this.props.init(response.data);
 
-      });
+    //   });
   };
 
   alertHandler = id => {

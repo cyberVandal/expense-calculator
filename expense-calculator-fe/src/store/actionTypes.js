@@ -18,6 +18,8 @@ export const SET_ERR_EMAIL = "SET_ERR_EMAIL";
 
 export const SET_USER_NAME = "SET_USER_NAME";
 
+export const SET_USER_ID = "SET_USER_ID";
+
 
 
 export const initGlobalState = payload => {
@@ -82,6 +84,12 @@ export const setErrEmail = payload => {
 export const setUserName = payload => {
   return {
     type: SET_USER_NAME,
+    payload: payload
+  };
+};
+export const setUserId = payload => {
+  return {
+    type: SET_USER_ID,
     payload: payload
   };
 };

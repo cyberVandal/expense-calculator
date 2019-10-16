@@ -117,14 +117,10 @@ class CreateProduct extends Component {
     this.setState({ errTmpPurchaseDate: "" });
     this.setState({ errTmpProdPrice: "" });
 
-    //Refresh of products to show on products component
-    // axios.get("http://localhost:8080/api/products")
-    //   .then(response => {
-    //     this.props.init(response.data);
-    //   });
+    
     this.setState({ clicked: true });
 
-    //this.props.history.push('/products');
+    
   }
 
   render() {

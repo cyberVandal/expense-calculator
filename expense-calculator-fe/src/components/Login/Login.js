@@ -38,19 +38,13 @@ class Login extends Component {
       "email": this.state.email,
       "password": this.state.password
     }
-    // fetch('http://localhost:8080/api/authenticate', {
-    //   method: 'POST',
-    //   body: JSON.stringify(this.state),
-    //   headers: {
-    //     'Content-Type': 'application/json'
-    //   },
-    //   credentials: 'include'
-    // })
-    axios.post('http://127.0.0.1:8080/api/authenticate', bodyFormData)
+   
+    axios.post('http://localhost:8080/api/authenticate', bodyFormData)
       .then(res => {
         if (res.status === 200) {
           console.log("USPESHNO");
           this.props.setUserName(this.state.email);
+         
           this.props.history.push('/products');
         } else {
           const error = new Error(res.error);
@@ -127,7 +121,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setUserName: user => dispatch(actionTypes.setUserName(user))
+    setUserName: user => dispatch(actionTypes.setUserName(user)),
+    setUserId: userId => dispatch(actionTypes.setUserId(userId))
 
   };
 };
