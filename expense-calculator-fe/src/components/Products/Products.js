@@ -86,6 +86,7 @@ class Products extends Component {
                   sectionStatus={this.props.sectionStatus}
                   alertStatus={this.props.alertStatus}
                   clickAlert={this.alertHandler}
+                  userName={this.props.userName}
                 />
               </table>
             </div>
@@ -109,6 +110,7 @@ class Products extends Component {
 const mapStateToProps = state => {
   return {
     prods: state.products,
+    userName: state.userName,
     sectionStatus: state.sectionStatus,
     alertStatus: state.alertStatus,
     deleteId: state.deleteId

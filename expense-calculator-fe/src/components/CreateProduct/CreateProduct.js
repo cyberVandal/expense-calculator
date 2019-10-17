@@ -107,7 +107,8 @@ class CreateProduct extends Component {
       "product_description": this.state.tmpProdDescription,
       "product_type": this.state.tmpProdType,
       "purchase_date": this.state.purchaseDate,
-      "product_price": this.state.tmpProdPrice
+      "product_price": this.state.tmpProdPrice,
+      "user_name": this.props.userName
     }
     axios.post('http://localhost:8080/api/products', bodyFormData);
 
@@ -237,7 +238,7 @@ class CreateProduct extends Component {
 
 const mapStateToProps = state => {
   return {
-    // tmpProdName: state.tmpProdName,
+     userName: state.userName,
     // errTmpProdName: state.errTmpProdName,
     // tmpProdDescription: state.tmpProdDescription,
     // errTmpProdDescription: state.errTmpProdDescription

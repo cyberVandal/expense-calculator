@@ -13,7 +13,10 @@ class Expenses extends Component {
 
     var sum = 0;
     for (let i = 0; i < this.props.products.length; i++) {
-      sum = sum + this.props.products[i].product_price;
+     // if(this.props.products[i].user_name === this.props.userName){
+        sum = sum + this.props.products[i].product_price;
+     //}
+     
     }
 
     this.props.setSum(sum);
@@ -89,7 +92,8 @@ const mapStateToProps = state => {
     products: state.products,
     tabStatus: state.tabStatus,
     sectionStatus: state.sectionStatus,
-    sum: state.sum
+    sum: state.sum,
+    userName: state.userName
   };
 };
 

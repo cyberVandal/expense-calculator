@@ -7,7 +7,8 @@ var ProductModel = mongoose.model(
         product_description: String,
         product_type: String,
         purchase_date: String,
-        product_price: Number
+        product_price: Number,
+        user_name:String
     })
 );
 

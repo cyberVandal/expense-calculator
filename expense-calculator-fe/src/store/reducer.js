@@ -20,8 +20,8 @@ const initialState = {
   deleteId: 0,
   tmpEmail: "",
   errEmail: "",
-  userName: "Goran Mitkovski",
-  userI: 0
+  userName: "",
+  userId: 0
 
 };
 

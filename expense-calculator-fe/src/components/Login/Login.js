@@ -121,8 +121,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setUserName: user => dispatch(actionTypes.setUserName(user)),
-    setUserId: userId => dispatch(actionTypes.setUserId(userId))
+    setUserName: user => dispatch(actionTypes.setUserName(user))
+    //setUserId: userId => dispatch(actionTypes.setUserId(userId))
 
   };
 };
