@@ -45,8 +45,8 @@ api.get('/api/secret', withAuth, function (req, res) {
 
 // POST route to register a user
 api.post('/api/register', function (req, res) {
-    const { email, password } = req.body;
-    const user = new User({ email, password });
+    const { firstName, lastName, telephone, country, email, password } = req.body;
+    const user = new User({ firstName, lastName, telephone, country,email, password });
     user.save(function (err) {
         if (err) {
             res.status(500)
