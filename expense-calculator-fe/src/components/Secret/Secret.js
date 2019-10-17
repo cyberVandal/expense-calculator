@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import "../../css/Global.css";
 import axios from "axios";
-import { NavLink } from "react-router-dom";
-import { connect } from "react-redux";
-import * as actionTypes from "../../store/actionTypes";
+// import { NavLink } from "react-router-dom";
+// import { connect } from "react-redux";
+// import * as actionTypes from "../../store/actionTypes";
 
 export default class Secret extends Component {
     constructor() {

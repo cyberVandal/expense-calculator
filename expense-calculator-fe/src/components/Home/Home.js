@@ -1,16 +1,16 @@
 import React, { Component } from "react";
 import "../../css/Global.css";
 import axios from "axios";
-import { NavLink } from "react-router-dom";
-import { connect } from "react-redux";
-import * as actionTypes from "../../store/actionTypes";
+// import { NavLink } from "react-router-dom";
+// import { connect } from "react-redux";
+// import * as actionTypes from "../../store/actionTypes";
 
 export default class Home extends Component {
     constructor() {
         super();
         //Set default message
         this.state = {
-            message: 'Loading...'
+            message: 'Loading...' 
         }
     }
     componentDidMount() {

@@ -38,11 +38,7 @@ class Products extends Component {
     axios.delete(`http://localhost:8080/api/products/${id}`);
 
     this.props.removeProduct(id);
-    // axios.get("http://localhost:8080/api/products")
-    //   .then(response => {
-    //     this.props.init(response.data);
-
-    //   });
+    
   };
 
   alertHandler = id => {
@@ -87,6 +83,7 @@ class Products extends Component {
                   alertStatus={this.props.alertStatus}
                   clickAlert={this.alertHandler}
                   userName={this.props.userName}
+                  year={this.props.year}
                 />
               </table>
             </div>
@@ -113,7 +110,8 @@ const mapStateToProps = state => {
     userName: state.userName,
     sectionStatus: state.sectionStatus,
     alertStatus: state.alertStatus,
-    deleteId: state.deleteId
+    deleteId: state.deleteId,
+    year: state.year
   };
 };
 

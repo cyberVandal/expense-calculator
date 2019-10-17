@@ -13,9 +13,10 @@ class Expenses extends Component {
 
     var sum = 0;
     for (let i = 0; i < this.props.products.length; i++) {
-     // if(this.props.products[i].user_name === this.props.userName){
+    if(this.props.products[i].user_name === this.props.userName){
         sum = sum + this.props.products[i].product_price;
-     //}
+        console.log(this.props.products[i].user_name);
+     }
      
     }
 
@@ -24,6 +25,12 @@ class Expenses extends Component {
 
   tabClickHandler = status => {
     this.props.setTabStatus(status);
+  };
+
+  yearSelectHandler = (e) =>{
+     
+      this.props.setYear(e.target.value);
+
   };
 
   render() {
@@ -59,7 +66,10 @@ class Expenses extends Component {
               {this.props.tabStatus === "monthly" ? (
                 <SelectorMonthly />
               ) : (
-                  <SelectorYearly />
+                  <SelectorYearly
+                  
+                    selectYear={this.yearSelectHandler}
+                  />
                 )}
             </div>
             <div className="dashboard-container-table">
@@ -75,6 +85,8 @@ class Expenses extends Component {
                 <TableRows
                   products={this.props.products}
                   sectionStatus={this.props.sectionStatus}
+                  userName={this.props.userName}
+                  year={this.props.year}
                 />
               </table>
             </div>
@@ -93,7 +105,8 @@ const mapStateToProps = state => {
     tabStatus: state.tabStatus,
     sectionStatus: state.sectionStatus,
     sum: state.sum,
-    userName: state.userName
+    userName: state.userName,
+    year: state.year
   };
 };
 
@@ -102,7 +115,8 @@ const mapDispatchToProps = dispatch => {
     removeProduct: id => dispatch(actionTypes.removeProduct(id)),
     setTabStatus: status => dispatch(actionTypes.setTabStatus(status)),
     setSectionStatus: status => dispatch(actionTypes.setSectionStatus(status)),
-    setSum: sum => dispatch(actionTypes.setSum(sum))
+    setSum: sum => dispatch(actionTypes.setSum(sum)),
+    setYear: year => dispatch(actionTypes.setYear(year))
   };
 };
 export default connect(

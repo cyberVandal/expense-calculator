@@ -20,6 +20,8 @@ export const SET_USER_NAME = "SET_USER_NAME";
 
 export const SET_USER_ID = "SET_USER_ID";
 
+export const SET_YEAR = "SET_YEAR";
+
 
 
 export const initGlobalState = payload => {
@@ -93,4 +95,12 @@ export const setUserId = payload => {
     payload: payload
   };
 };
+export const setYear = payload => {
+  return {
+    type: SET_YEAR,
+    payload: payload
+  };
+};
+
+
 
