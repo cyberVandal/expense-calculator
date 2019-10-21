@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Redirect } from 'react-router-dom';
+//import { Redirect } from 'react-router-dom';
 import { connect } from "react-redux";
 import axios from "axios";
 import "../../css/Global.css";
@@ -43,6 +43,7 @@ class Login extends Component {
       .then(res => {
         if (res.status === 200) {
           console.log("USPESHNO");
+          console.log(res.data.token);
           this.props.setUserName(this.state.email);
          
           this.props.history.push('/products');

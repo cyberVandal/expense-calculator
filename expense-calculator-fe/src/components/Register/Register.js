@@ -171,7 +171,7 @@ class Register extends Component {
               <input
                 className="border-radius form-input"
                 type="text"
-                name="telephone" name="lastName" 
+                name="telephone"
                 onChange={this.handleChangeTelephone}
                 value={this.state.telephone}
               />

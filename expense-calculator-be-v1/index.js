@@ -91,8 +91,9 @@ api.post('/api/authenticate', function (req, res) {
                     const token = jwt.sign(payload, secret, {
                         expiresIn: 86400 * 30
                     });
-                    res.cookie('token', token, { httpOnly: true, secure: true, sameSite: true })
-                        .sendStatus(200);
+                   // res.cookie('token', token, { httpOnly: true, secure: true, sameSite: true })
+                        res.status(200)
+                        .json({token});
                 }
             });
         }
