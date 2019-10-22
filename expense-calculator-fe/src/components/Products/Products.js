@@ -35,9 +35,11 @@ class Products extends Component {
   removeProductHandler = id => {
 
 
-    axios.delete(`http://localhost:8080/api/products/${id}`);
-
-    this.props.removeProduct(id);
+    axios.delete(`http://localhost:8080/api/products/${id}`)
+      .then(response => {
+        this.props.removeProduct(id);
+      } );
+    
     
   };
 

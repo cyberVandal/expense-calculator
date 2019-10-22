@@ -9,7 +9,7 @@ import Header from "../Header/Header";
 import * as actionTypes from "../../store/actionTypes";
 
 
-class CreateProduct extends Component {
+class EditProduct extends Component {
   state = {
     clicked: false,
     tmpProdName: "",
@@ -112,13 +112,11 @@ class CreateProduct extends Component {
     }
     axios.post('http://localhost:8080/api/products', bodyFormData);
 
-    this.setState({ 
-        errTmpProdName: "",
-        errTmpProdDescription: "",
-        errTmpProdType: "",
-        errTmpPurchaseDate: "" ,
-        errTmpProdPrice: "" });
-   
+    this.setState({ errTmpProdName: "" });
+    this.setState({ errTmpProdDescription: "" });
+    this.setState({ errTmpProdType: "" });
+    this.setState({ errTmpPurchaseDate: "" });
+    this.setState({ errTmpProdPrice: "" });
 
     
     this.setState({ clicked: true });
@@ -267,4 +265,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(CreateProduct);
+)(EditProduct);
