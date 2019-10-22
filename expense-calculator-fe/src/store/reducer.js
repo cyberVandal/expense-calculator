@@ -9,7 +9,7 @@ import {
   SET_TMP_EMAIL,
   SET_ERR_EMAIL,
   SET_USER_NAME,
-  SET_USER_ID,
+  SET_USER_TOKEN,
   SET_YEAR
 } from "./actionTypes";
 
@@ -22,7 +22,7 @@ const initialState = {
   tmpEmail: "",
   errEmail: "",
   userName: "goran@trajko.com",
-  userId: 0,
+  userToken: "",
   year:"2019"
 
 };
@@ -90,10 +90,10 @@ const reducer = (state = initialState, action) => {
         ...state,
         userName: action.payload
       };
-      case SET_USER_ID:
+      case  SET_USER_TOKEN:
       return {
         ...state,
-        userId: action.payload
+        userToken: action.payload
       };
       case  SET_YEAR:
         return {

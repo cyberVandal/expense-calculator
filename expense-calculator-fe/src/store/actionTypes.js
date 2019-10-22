@@ -18,7 +18,7 @@ export const SET_ERR_EMAIL = "SET_ERR_EMAIL";
 
 export const SET_USER_NAME = "SET_USER_NAME";
 
-export const SET_USER_ID = "SET_USER_ID";
+export const  SET_USER_TOKEN = " SET_USER_TOKEN";
 
 export const SET_YEAR = "SET_YEAR";
 
@@ -89,9 +89,9 @@ export const setUserName = payload => {
     payload: payload
   };
 };
-export const setUserId = payload => {
+export const setUserToken = payload => {
   return {
-    type: SET_USER_ID,
+    type: SET_USER_TOKEN,
     payload: payload
   };
 };

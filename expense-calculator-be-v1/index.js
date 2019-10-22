@@ -92,8 +92,12 @@ api.post('/api/authenticate', function (req, res) {
                         expiresIn: 86400 * 30
                     });
                    // res.cookie('token', token, { httpOnly: true, secure: true, sameSite: true })
-                        res.status(200)
-                        .json({token});
+                   res.status(200)
+                      .json({token}); 
+                     // .cookie('cokkieName', token , { maxAge: 900000, httpOnly: true });
+                        
+                       // res.status(200)
+                        //
                 }
             });
         }

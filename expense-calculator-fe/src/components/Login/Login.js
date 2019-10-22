@@ -45,7 +45,7 @@ class Login extends Component {
           console.log("USPESHNO");
           console.log(res.data.token);
           this.props.setUserName(this.state.email);
-         
+          this.props.setUserToken(res.data.token);
           this.props.history.push('/products');
         } else {
           const error = new Error(res.error);
@@ -122,8 +122,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setUserName: user => dispatch(actionTypes.setUserName(user))
-    //setUserId: userId => dispatch(actionTypes.setUserId(userId))
+    setUserName: user => dispatch(actionTypes.setUserName(user)),
+    setUserToken: token => dispatch(actionTypes.setUserToken(token))
 
   };
 };
