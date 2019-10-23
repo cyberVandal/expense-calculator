@@ -1,5 +1,5 @@
 import {
-  ADD_TO_CART,
+  
   INIT_GLOBAL_STATE,
   REMOVE_PRODUCT,
   SET_TAB_STATUS,
@@ -11,11 +11,14 @@ import {
   SET_USER_NAME,
   SET_USER_TOKEN,
   SET_YEAR,
-  SET_EDIT_ID
+  SET_EDIT_ID,
+  SET_FILTER_PRODUCTS
 } from "./actionTypes";
 
 const initialState = {
   products: [],
+  userProducts: [],
+  filterProducts:[],
   tabStatus: "monthly",
   sectionStatus: "products",
   sum: 0,
@@ -37,22 +40,6 @@ const reducer = (state = initialState, action) => {
         products: action.payload
       };
 
-    // case ADD_TO_CART:
-    //   const newCartProducts = [...state.myCart];
-    //   let isAlreadyPushed = false;
-    //   for (let i = 0; i < newCartProducts.length; i++) {
-    //     if (newCartProducts[i].id === action.payload.id) {
-    //       isAlreadyPushed = true;
-    //       break;
-    //     }
-    //   }
-    //   if (!isAlreadyPushed) {
-    //     newCartProducts.push(action.payload);
-    //   }
-    //   return {
-    //     ...state,
-    //     myCart: newCartProducts
-    //   };
     case REMOVE_PRODUCT:
       return {
         ...state,
@@ -109,6 +96,13 @@ const reducer = (state = initialState, action) => {
           ...state,
           year: action.payload
         };
+      case   SET_FILTER_PRODUCTS:
+        return {
+          ...state,
+          filterProducts: action.payload
+        };
+
+       
 
      
     default:

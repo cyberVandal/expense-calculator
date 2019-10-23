@@ -8,29 +8,54 @@ import SelectorYearly from "../SelectorYearly/SelectorYearly";
 import TableRows from "../TableRows/TableRows";
 
 class Expenses extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      year: "kur"
+    };
+  }
   componentDidMount() {
     this.props.setSectionStatus("expenses");
 
     var sum = 0;
     for (let i = 0; i < this.props.products.length; i++) {
-    if(this.props.products[i].user_name === this.props.userName){
+    //if(this.props.products[i].user_name === this.props.userName){
         sum = sum + this.props.products[i].product_price;
-        console.log(this.props.products[i].user_name);
-     }
+        //console.log(this.props.products[i].user_name);
+    // }
      
     }
-
+    this.props.setFilterProducts(this.props.products);
     this.props.setSum(sum);
+
   }
 
   tabClickHandler = status => {
     this.props.setTabStatus(status);
   };
 
-  yearSelectHandler = (e) =>{
+  yearSelectHandler = (e) => {
      
       this.props.setYear(e.target.value);
+      this.setState({year: e.target.value});
+     
+      var filterProducts = [];
+      var sum = 0;
+      for (let i = 0; i < this.props.products.length; i++) {
+        if(this.props.products[i].purchase_date.slice(0, 4) === this.props.year){
+            
+          filterProducts.push(this.props.products[i]);
+          sum = sum + this.props.products[i].product_price;
+           
+         }
+      }
 
+     
+        
+        this.props.setFilterProducts(filterProducts);
+        this.props.setSum(sum);
+        console.log(this.state.year);
   };
 
   render() {
@@ -83,7 +108,7 @@ class Expenses extends Component {
                   <th />
                 </tr>
                 <TableRows
-                  products={this.props.products}
+                  products={this.props.filterProducts}
                   sectionStatus={this.props.sectionStatus}
                   userName={this.props.userName}
                   year={this.props.year}
@@ -102,6 +127,7 @@ class Expenses extends Component {
 const mapStateToProps = state => {
   return {
     products: state.products,
+    filterProducts: state.filterProducts,
     tabStatus: state.tabStatus,
     sectionStatus: state.sectionStatus,
     sum: state.sum,
@@ -116,7 +142,8 @@ const mapDispatchToProps = dispatch => {
     setTabStatus: status => dispatch(actionTypes.setTabStatus(status)),
     setSectionStatus: status => dispatch(actionTypes.setSectionStatus(status)),
     setSum: sum => dispatch(actionTypes.setSum(sum)),
-    setYear: year => dispatch(actionTypes.setYear(year))
+    setYear: year => dispatch(actionTypes.setYear(year)),
+    setFilterProducts: products => dispatch(actionTypes.setFilterProducts(products))
   };
 };
 export default connect(

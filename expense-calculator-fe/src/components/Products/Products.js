@@ -19,16 +19,40 @@ class Products extends Component {
   componentDidMount() {
     this.props.setSectionStatus("products");
 
-    axios.get("http://localhost:8080/api/products")
+    axios.get('http://localhost:8080/api/products')
       .then(response => {
-        this.props.init(response.data);
+        var userProducts = [];
+        for (let i = 0; i < response.data.length; i++) {
+        if(response.data[i].user_name === this.props.userName){
+
+            userProducts.push(response.data[i]);
+            //sum = sum + this.props.products[i].product_price;
+            //console.log(this.props.products[i].user_name);
+         }
+         
+        }
+        
+
+        this.props.init(userProducts);
       });
    
   }
   componentDidUpdate(){
     axios.get("http://localhost:8080/api/products")
       .then(response => {
-        this.props.init(response.data);
+        var userProducts = [];
+        for (let i = 0; i < response.data.length; i++) {
+        if(response.data[i].user_name === this.props.userName){
+
+            userProducts.push(response.data[i]);
+            //sum = sum + this.props.products[i].product_price;
+            //console.log(this.props.products[i].user_name);
+         }
+         
+        }
+        console.log(userProducts);
+
+        this.props.init(userProducts);
       });
   }
 
@@ -54,6 +78,11 @@ class Products extends Component {
 
   alertHandler = id => {
     this.props.setAlertStatus(id);
+  };
+
+  productsFilter = () => {
+    //product.purchase_date.slice(0, 4) === props.year ? (
+    //product.user_name === props.userName ? (
   };
 
   render() {

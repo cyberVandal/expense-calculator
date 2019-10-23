@@ -6,8 +6,8 @@ function TableRow(props) {
   return (
     <>
       {props.products.map(product => (
-        product.user_name === props.userName ? (
-            product.purchase_date.slice(0, 4) === props.year ? (<tr key={product.id}>
+       // product.purchase_date.slice(0, 4) === props.year ? (
+           <tr key={product.id}>
               <td>{product.product_name}</td>
               <td>{product.product_type}</td>
               <td>{product.product_description}</td>
@@ -24,8 +24,8 @@ function TableRow(props) {
                   )
             }
               </td>
-            </tr>) : ("")
-        ) : ("")
+            </tr>//) : ("")
+       
         
       ))}
     </>

@@ -6,7 +6,7 @@ function SelectorYearly(props) {
     <>
       <label className="margin-left">Choose Year</label>
       <select className="border-radius" onChange={props.selectYear}>
-        <option value="2018">2019</option>
+        <option value="2019">2019</option>
         <option value="2018">2018</option>
         <option value="2017">2017</option>
         <option value="2016">2016</option>
