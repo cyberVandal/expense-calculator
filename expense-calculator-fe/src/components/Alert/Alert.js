@@ -7,9 +7,7 @@ function Alert(props) {
       <div className="alert-message">
         <h2>Delete Product</h2>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum
-          eligendi at iusto vel numquam voluptatem odit modi maiores recusandae
-          accusantium.
+        You are will delete this product. Are you sure you want to continue?
         </p>
         <div className="alert-button-holder">
           <button

@@ -32,10 +32,21 @@ class EditProduct extends Component {
     this.getDate();
     var date = { currentTime: new Date().toLocaleString() };
     console.log(date);
+    axios.get(`http://localhost:8080/api/products/${this.props.editId}`) 
+          .then(res => {
+            this.setState({ 
+              tmpProdName: res.data.product_name,
+              tmpProdDescription: res.data.product_description,
+              tmpProdType: res.data.product_type,
+              tmpPurchaseDate: res.data.purchase_date ,
+              tmpProdPrice: res.data.product_price
+             });
+          }); 
+
   }
 
   componentWillUnmount() {
-    axios.get("http://localhost:8080/api/products")
+    axios.get('http://localhost:8080/api/products')
       .then(response => {
         this.props.init(response.data);
       });
@@ -73,7 +84,7 @@ class EditProduct extends Component {
   //DA SE DOSREDI DATUM DA E VALIDEN 
   handleChangePurchaseDate = e => {
     // if (e.target.value.length <= 8) {
-    this.setState({ tmpPurchaseDate: e.target.value });
+    this.setState({ tmpPurchaseDate: e.target.value});
     this.setState({ purchaseDate: new Date(e.target.value).toJSON().slice(0, 10).replace(/-/g, '/') })
     this.setState({ errTmpPurchaseDate: "" });
 
@@ -110,18 +121,20 @@ class EditProduct extends Component {
       "product_price": this.state.tmpProdPrice,
       "user_name": this.props.userName
     }
-    axios.post('http://localhost:8080/api/products', bodyFormData);
+    axios.put(`http://localhost:8080/api/products/${this.props.editId}`, bodyFormData)
+      .then(res => {
+        if(res.status === 200){
+          this.setState({ 
+            errTmpProdName: "",
+            errTmpProdDescription: "",
+            errTmpProdType: "",
+            errTmpPurchaseDate: "" ,
+            errTmpProdPrice: "",
+            clicked: true
+           });
+        }
+      });
 
-    this.setState({ errTmpProdName: "" });
-    this.setState({ errTmpProdDescription: "" });
-    this.setState({ errTmpProdType: "" });
-    this.setState({ errTmpPurchaseDate: "" });
-    this.setState({ errTmpProdPrice: "" });
-
-    
-    this.setState({ clicked: true });
-
-    
   }
 
   render() {
@@ -136,7 +149,7 @@ class EditProduct extends Component {
         <div className="dashboard-container">
           <div className="column">
             <div className="dashboard-container-head">
-              <h1>New Product</h1>
+              <h1>Edit Product</h1>
             </div>
 
             <div className="dashboard-container-table">
@@ -184,10 +197,9 @@ class EditProduct extends Component {
                     <label for="purchaseDate">Purchase Date:</label>
                     <input
                       className="border-radius form-input"
-                      type="date"
+                      type="text"
                       name="purchaseDate"
-
-                      max="2019-10-12"
+                      // max="2019-10-12"
                       required
                       onChange={this.handleChangePurchaseDate}
                       value={this.state.tmpPurchaseDate}
@@ -209,7 +221,7 @@ class EditProduct extends Component {
                       this.state.errTmpProdPrice !== '' ? <p>{this.state.errTmpProdPrice}</p> : null
                     }
                     <button className="border-radius button-solid">
-                      CREATE PRODUCT
+                      EDIT PRODUCT
                     </button>
                   </form>
                 </div>
@@ -222,7 +234,7 @@ class EditProduct extends Component {
                     </span>
                     <br />
                     <h1 style={{ display: "inline-block", color: "#8D8D8D" }}>
-                      You are creating a new product
+                        You are editing the selected product.
                     </h1>
                   </div>
                 </div>
@@ -239,12 +251,8 @@ class EditProduct extends Component {
 const mapStateToProps = state => {
   return {
      userName: state.userName,
-    // errTmpProdName: state.errTmpProdName,
-    // tmpProdDescription: state.tmpProdDescription,
-    // errTmpProdDescription: state.errTmpProdDescription
-    // sectionStatus: state.sectionStatus,
-    // alertStatus: state.alertStatus,
-    // deleteId: state.deleteId
+     editId: state.editId
+   
   };
 };
 
@@ -252,13 +260,6 @@ const mapDispatchToProps = dispatch => {
   return {
 
     init: products => dispatch(actionTypes.initGlobalState(products))
-    // setTmpProdName: tmp => dispatch(actionTypes.setTmpProdName(tmp)),
-    // setErrTmpProdName: err => dispatch(actionTypes.setErrTmpProdName(err)),
-    // setTmpProdDescription: tmp1 => dispatch(actionTypes.setTmpProdDescription(tmp1)),
-    // setErrTmpProdDescription: err1 => dispatch(actionTypes.setErrTmpProdDescription(err1)),
-    // removeProduct: id => dispatch(actionTypes.removeProduct(id)),
-    // setSectionStatus: status => dispatch(actionTypes.setSectionStatus(status)),
-    // setAlertStatus: id => dispatch(actionTypes.setAlertStatus(id))
   };
 };
 

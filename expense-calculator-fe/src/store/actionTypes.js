@@ -22,6 +22,8 @@ export const  SET_USER_TOKEN = " SET_USER_TOKEN";
 
 export const SET_YEAR = "SET_YEAR";
 
+export const SET_EDIT_ID= "SET_EDIT_ID";
+
 
 
 export const initGlobalState = payload => {
@@ -69,6 +71,13 @@ export const setAlertStatus = payload => {
     payload: payload
   };
 };
+export const setEditId = payload => {
+  return {
+    type: SET_EDIT_ID,
+    payload: payload
+  };
+};
+
 export const setTmpEmail = payload => {
   return {
     type: SET_TMP_EMAIL,

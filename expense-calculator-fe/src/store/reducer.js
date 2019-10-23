@@ -10,7 +10,8 @@ import {
   SET_ERR_EMAIL,
   SET_USER_NAME,
   SET_USER_TOKEN,
-  SET_YEAR
+  SET_YEAR,
+  SET_EDIT_ID
 } from "./actionTypes";
 
 const initialState = {
@@ -23,7 +24,8 @@ const initialState = {
   errEmail: "",
   userName: "goran@trajko.com",
   userToken: "",
-  year:"2019"
+  year:"2019",
+  editId: 0
 
 };
 
@@ -34,22 +36,23 @@ const reducer = (state = initialState, action) => {
         ...state,
         products: action.payload
       };
-    case ADD_TO_CART:
-      const newCartProducts = [...state.myCart];
-      let isAlreadyPushed = false;
-      for (let i = 0; i < newCartProducts.length; i++) {
-        if (newCartProducts[i].id === action.payload.id) {
-          isAlreadyPushed = true;
-          break;
-        }
-      }
-      if (!isAlreadyPushed) {
-        newCartProducts.push(action.payload);
-      }
-      return {
-        ...state,
-        myCart: newCartProducts
-      };
+
+    // case ADD_TO_CART:
+    //   const newCartProducts = [...state.myCart];
+    //   let isAlreadyPushed = false;
+    //   for (let i = 0; i < newCartProducts.length; i++) {
+    //     if (newCartProducts[i].id === action.payload.id) {
+    //       isAlreadyPushed = true;
+    //       break;
+    //     }
+    //   }
+    //   if (!isAlreadyPushed) {
+    //     newCartProducts.push(action.payload);
+    //   }
+    //   return {
+    //     ...state,
+    //     myCart: newCartProducts
+    //   };
     case REMOVE_PRODUCT:
       return {
         ...state,
@@ -75,6 +78,12 @@ const reducer = (state = initialState, action) => {
         ...state,
         deleteId: action.payload
       };
+    case SET_EDIT_ID:
+      return {
+        ...state,
+        editId: action.payload
+      };
+      
     case SET_TMP_EMAIL:
       return {
         ...state,

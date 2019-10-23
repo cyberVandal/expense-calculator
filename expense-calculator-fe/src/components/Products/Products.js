@@ -37,10 +37,19 @@ class Products extends Component {
 
     axios.delete(`http://localhost:8080/api/products/${id}`)
       .then(response => {
-        this.props.removeProduct(id);
+        if(response.status === 200){
+          this.props.removeProduct(id);
+        }
+       
       } );
     
     
+  };
+
+  editHandler = id => {
+    this.props.setEditId(id);
+    this.props.history.push('/edit-product');
+
   };
 
   alertHandler = id => {
@@ -78,15 +87,18 @@ class Products extends Component {
                   <th>Product Price</th>
                   <th>Action</th>
                 </tr>
+                <tbody>
                 {/* Tuka Pocnuva Mapiranje ili dinamichna tabela */}
                 <TableRows
                   products={this.props.prods}
                   sectionStatus={this.props.sectionStatus}
                   alertStatus={this.props.alertStatus}
+                  clickEdit={this.editHandler}
                   clickAlert={this.alertHandler}
                   userName={this.props.userName}
                   year={this.props.year}
                 />
+                </tbody>
               </table>
             </div>
           </div>
@@ -122,7 +134,8 @@ const mapDispatchToProps = dispatch => {
     init: products => dispatch(actionTypes.initGlobalState(products)),
     removeProduct: id => dispatch(actionTypes.removeProduct(id)),
     setSectionStatus: status => dispatch(actionTypes.setSectionStatus(status)),
-    setAlertStatus: id => dispatch(actionTypes.setAlertStatus(id))
+    setAlertStatus: id => dispatch(actionTypes.setAlertStatus(id)),
+    setEditId: id => dispatch(actionTypes.setEditId(id))
   };
 };
 

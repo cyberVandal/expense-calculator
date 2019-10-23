@@ -7,6 +7,7 @@ import Expenses from "./Expenses/Expenses";
 import CreateProduct from "./CreateProduct/CreateProduct";
 import Home from "./Home/Home";
 import Secret from "./Secret/Secret";
+import EditProduct from "./EditProduct/EditProduct";
 
 class Main extends Component {
   constructor(props) {
@@ -33,6 +34,7 @@ class Main extends Component {
           <Route path="/create-product" component={CreateProduct} />
           <Route path="/" exact component={Home} />
           <Route path="/secret" component={Secret} />
+          <Route path="/edit-product" component={EditProduct} />
         </Switch>
       </>
     );

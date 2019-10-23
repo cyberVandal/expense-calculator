@@ -5,7 +5,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 function EditDeleteIcon(props) {
   return (
     <>
-      <span className="edit-trash">
+      <span className="edit-trash" 
+         onClick={props.clickEdit}
+      >
         <FontAwesomeIcon icon="edit" />
       </span>
       <span
