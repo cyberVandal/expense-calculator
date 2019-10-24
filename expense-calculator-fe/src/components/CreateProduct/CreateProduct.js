@@ -37,7 +37,17 @@ class CreateProduct extends Component {
   componentWillUnmount() {
     axios.get("http://localhost:8080/api/products")
       .then(response => {
-        this.props.init(response.data);
+        var userProducts = [];
+        for (let i = 0; i < response.data.length; i++) {
+        if(response.data[i].user_name === this.props.userName){
+
+            userProducts.push(response.data[i]);
+            //sum = sum + this.props.products[i].product_price;
+            //console.log(this.props.products[i].user_name);
+         }
+         
+        }
+        this.props.init(userProducts);
       });
 
   }
@@ -110,18 +120,26 @@ class CreateProduct extends Component {
       "product_price": this.state.tmpProdPrice,
       "user_name": this.props.userName
     }
-    axios.post('http://localhost:8080/api/products', bodyFormData);
+    axios.post('http://localhost:8080/api/products', bodyFormData)
+      .then(res => {
+          if(res.status === 201){
+            this.setState({ 
+              errTmpProdName: "",
+              errTmpProdDescription: "",
+              errTmpProdType: "",
+              errTmpPurchaseDate: "" ,
+              errTmpProdPrice: "",
+              clicked: true  });
+         
+      
+          
+         
+          }
+       
 
-    this.setState({ 
-        errTmpProdName: "",
-        errTmpProdDescription: "",
-        errTmpProdType: "",
-        errTmpPurchaseDate: "" ,
-        errTmpProdPrice: "" });
+      });
+
    
-
-    
-    this.setState({ clicked: true });
 
     
   }
