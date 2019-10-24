@@ -1,7 +1,9 @@
-import  React, {Component} from "react";
+import React, { Component } from "react";
 import { NavLink } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
+import { connect } from "react-redux";
 import axios from 'axios';
+import * as actionTypes from "../../store/actionTypes";
 import '../../css/Global.css';
 
 
@@ -23,6 +25,9 @@ class Register extends Component {
 
   }
 
+  componentDidMount() {
+    this.props.setLogout(false);
+  }
   getDate = () => {
     var date = { currentTime: new Date().toLocaleString() };
 
@@ -34,20 +39,20 @@ class Register extends Component {
     if (e.target.value.length <= 8) {
       this.setState({ firstName: e.target.value });
       this.setState({ errFirstName: "" });
-      
+
     } else {
       this.setState({ errFirstName: "8 character is max" });
-     
+
     }
   };
   handleChangeLastName = e => {
     if (e.target.value.length <= 8) {
       this.setState({ lastName: e.target.value });
       this.setState({ errLastName: "" });
-      
+
     } else {
       this.setState({ errLastName: "8 character is max" });
-      
+
     }
   };
   handleChangeTelephone = e => {
@@ -56,7 +61,7 @@ class Register extends Component {
       this.setState({ errTelephone: "" });
     } else {
       this.setState({ errTelephone: "8 character is max" });
-      
+
     }
   };
 
@@ -64,30 +69,30 @@ class Register extends Component {
     if (e.target.value.length <= 20) {
       this.setState({ email: e.target.value });
       this.setState({ errEmail: "" });
-      
+
     } else {
       this.setState({ errEmail: "8 character is max" });
-      
+
     }
   };
   handleChangeCountry = e => {
     if (e.target.value.length <= 8) {
       this.setState({ country: e.target.value });
       this.setState({ errCountry: "" });
-      
+
     } else {
       this.setState({ errCountry: "8 character is max" });
-      
+
     }
   };
   handleChangePassword = e => {
     if (e.target.value.length <= 8) {
       this.setState({ password: e.target.value });
       this.setState({ errPassword: "" });
-     
+
     } else {
       this.setState({ errPassword: "8 character is max" });
- 
+
     }
   };
 
@@ -101,7 +106,7 @@ class Register extends Component {
       "country": this.state.country,
       "email": this.state.email,
       "password": this.state.password
-       
+
     }
     axios.post('http://localhost:8080/api/register', bodyFormData);
 
@@ -112,10 +117,10 @@ class Register extends Component {
     this.setState({ errEmail: "" });
     this.setState({ errPassword: "" });
 
-    
+
     this.setState({ clicked: true });
 
-    
+
   }
 
 
@@ -145,7 +150,7 @@ class Register extends Component {
               <input
                 className="border-radius form-input"
                 type="text"
-                name="lastName" 
+                name="lastName"
                 onChange={this.handleChangeLastName}
                 value={this.state.lastName}
               />
@@ -158,7 +163,7 @@ class Register extends Component {
               <input
                 className="border-radius form-input"
                 type="text"
-                name="email" 
+                name="email"
                 onChange={this.handleChangeEmail}
                 value={this.state.email}
               />
@@ -220,5 +225,26 @@ class Register extends Component {
   }
 
 }
+const mapStateToProps = state => {
+  return {
+    prods: state.products,
+    sectionStatus: state.sectionStatus,
+    alertStatus: state.alertStatus,
+    deleteId: state.deleteId,
+    logout: state.logout,
+    token: state.userToken
+  };
+};
 
-export default Register;
+const mapDispatchToProps = dispatch => {
+  return {
+    setUserName: user => dispatch(actionTypes.setUserName(user)),
+    setUserToken: token => dispatch(actionTypes.setUserToken(token)),
+    setLogout: data => dispatch(actionTypes.setLogout(data))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Register);

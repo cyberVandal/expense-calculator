@@ -18,13 +18,15 @@ export const SET_ERR_EMAIL = "SET_ERR_EMAIL";
 
 export const SET_USER_NAME = "SET_USER_NAME";
 
-export const  SET_USER_TOKEN = " SET_USER_TOKEN";
+export const SET_USER_TOKEN = " SET_USER_TOKEN";
 
 export const SET_YEAR = "SET_YEAR";
 
 export const SET_EDIT_ID = "SET_EDIT_ID";
 
 export const SET_FILTER_PRODUCTS = "SET_FILTER_PRODUCTS";
+
+export const SET_LOGOUT = "SET_LOGOUT";
 
 
 
@@ -118,6 +120,13 @@ export const setFilterProducts = payload => {
     payload: payload
   };
 };
+export const setLogout = payload => {
+  return {
+    type: SET_LOGOUT,
+    payload: payload
+  };
+};
+
 
 
 

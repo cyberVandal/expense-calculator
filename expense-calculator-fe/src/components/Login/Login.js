@@ -18,6 +18,13 @@ class Login extends Component {
     }
   }
 
+  componentDidMount() {
+    if (!this.props.token && this.props.logout === true) {
+      this.setState({ clicked: true })
+    } else if (!this.props.token && this.props.logout === false) {
+      this.setState({ clicked: false })
+    }
+  }
   handleChangeEmail = e => {
 
 
@@ -38,7 +45,7 @@ class Login extends Component {
       "email": this.state.email,
       "password": this.state.password
     }
-   
+
     axios.post('http://localhost:8080/api/authenticate', bodyFormData)
       .then(res => {
         if (res.status === 200) {
@@ -59,12 +66,16 @@ class Login extends Component {
   };
 
   render() {
-    // if (this.state.clicked === true) {
-    //   return <Redirect to='/products' />
-    // }
+
     return (
       <div className="wrapper">
         <div className="column">
+          {this.state.clicked === false ? ("") : (<div className="text-holder">
+            <p>
+              Please Login first!
+            </p>
+          </div>)}
+
           <div className="main">
             <form onSubmit={this.onSubmit}>
               <label>E-mail: </label>
@@ -115,7 +126,9 @@ const mapStateToProps = state => {
     prods: state.products,
     sectionStatus: state.sectionStatus,
     alertStatus: state.alertStatus,
-    deleteId: state.deleteId
+    deleteId: state.deleteId,
+    logout: state.logout,
+    token: state.userToken
   };
 };
 

@@ -1,5 +1,5 @@
 import {
-  
+
   INIT_GLOBAL_STATE,
   REMOVE_PRODUCT,
   SET_TAB_STATUS,
@@ -12,23 +12,25 @@ import {
   SET_USER_TOKEN,
   SET_YEAR,
   SET_EDIT_ID,
-  SET_FILTER_PRODUCTS
+  SET_FILTER_PRODUCTS,
+  SET_LOGOUT
 } from "./actionTypes";
 
 const initialState = {
   products: [],
   userProducts: [],
-  filterProducts:[],
+  filterProducts: [],
   tabStatus: "yearly",
   sectionStatus: "products",
   sum: 0,
   deleteId: 0,
   tmpEmail: "",
   errEmail: "",
-  userName: "goran@trajko.com",
+  userName: "",
   userToken: "",
-  year:"2019",
-  editId: 0
+  year: "",
+  editId: 0,
+  logout: false
 
 };
 
@@ -70,7 +72,7 @@ const reducer = (state = initialState, action) => {
         ...state,
         editId: action.payload
       };
-      
+
     case SET_TMP_EMAIL:
       return {
         ...state,
@@ -86,25 +88,30 @@ const reducer = (state = initialState, action) => {
         ...state,
         userName: action.payload
       };
-      case  SET_USER_TOKEN:
+    case SET_USER_TOKEN:
       return {
         ...state,
         userToken: action.payload
       };
-      case  SET_YEAR:
-        return {
-          ...state,
-          year: action.payload
-        };
-      case   SET_FILTER_PRODUCTS:
-        return {
-          ...state,
-          filterProducts: action.payload
-        };
+    case SET_YEAR:
+      return {
+        ...state,
+        year: action.payload
+      };
+    case SET_FILTER_PRODUCTS:
+      return {
+        ...state,
+        filterProducts: action.payload
+      };
+    case SET_LOGOUT:
+      return {
+        ...state,
+        logout: action.payload
+      };
 
-       
 
-     
+
+
     default:
       return state;
   }

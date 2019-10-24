@@ -3,6 +3,7 @@ import "./Products.css";
 import "../../css/Global.css";
 import axios from "axios";
 import { NavLink } from "react-router-dom";
+import { Redirect } from 'react-router-dom';
 import Header from "../Header/Header";
 import { connect } from "react-redux";
 import * as actionTypes from "../../store/actionTypes";
@@ -16,34 +17,40 @@ class Products extends Component {
     super(props);
     this.state = {
       products: [],
-      deleteId: 0
+      deleteId: 0,
+      clicked: false
     };
   }
   componentDidMount() {
-    this.props.setSectionStatus("products");
+    if (this.props.token) {
+      this.props.setSectionStatus("products");
+      axios.get('http://localhost:8080/api/products')
+        .then(response => {
+          var userProducts = [];
+          for (let i = 0; i < response.data.length; i++) {
+            if (response.data[i].user_name === this.props.userName) {
 
-    axios.get('http://localhost:8080/api/products')
-      .then(response => {
-        var userProducts = [];
-        for (let i = 0; i < response.data.length; i++) {
-        if(response.data[i].user_name === this.props.userName){
+              userProducts.push(response.data[i]);
+            }
+          }
+          this.props.init(userProducts);
+        });
+    } else {
 
-            userProducts.push(response.data[i]);
-         }
-        }
-        this.props.init(userProducts);
-      });
-   
+      this.setState({ clicked: true });
+      this.props.setLogout(true);
+    }
+
   }
 
   removeProductHandler = id => {
     axios.delete(`http://localhost:8080/api/products/${id}`)
       .then(response => {
-        if(response.status === 200){
+        if (response.status === 200) {
           this.productsUpdate();
           this.props.removeProduct(id);
         }
-      } );
+      });
   };
 
   editHandler = id => {
@@ -61,21 +68,24 @@ class Products extends Component {
     //product.user_name === props.userName ? (
   };
 
-  productsUpdate = () =>{
+  productsUpdate = () => {
     axios.get('http://localhost:8080/api/products')
-    .then(response => {
-      var userProducts = [];
-      for (let i = 0; i < response.data.length; i++) {
-      if(response.data[i].user_name === this.props.userName){
+      .then(response => {
+        var userProducts = [];
+        for (let i = 0; i < response.data.length; i++) {
+          if (response.data[i].user_name === this.props.userName) {
 
-          userProducts.push(response.data[i]);
-       }
-      }
-       this.props.init(userProducts);
-    });
+            userProducts.push(response.data[i]);
+          }
+        }
+        this.props.init(userProducts);
+      });
   }
 
   render() {
+    if (this.state.clicked === true) {
+      return <Redirect to='/' />
+    }
     return (
       <>
         <Header />
@@ -107,41 +117,41 @@ class Products extends Component {
                   <th>Action</th>
                 </tr>
                 <tbody>
-                {/* Tuka Pocnuva Mapiranje ili dinamichna tabela */}
-                   {this.props.prods.map(product => (
-       
+                  {/* Tuka Pocnuva Mapiranje ili dinamichna tabela */}
+                  {this.props.prods.map(product => (
+
                     <tr key={product.id}>
-                        <td>{product.product_name}</td>
-                        <td>{product.product_type}</td>
-                        <td>{product.product_description}</td>
-                        <td>{product.purchase_date}</td>
-                        <td>{product.product_price}</td>
-                        <td>
-                          {this.props.sectionStatus === "products" ? (
-                            <>
-                            <span className="edit-trash" 
-                               
-                                onClick={() => this.editHandler(product._id)}
-                                >
-                                  <FontAwesomeIcon icon="edit" />
-                                </span>
-                                <span
-                                  className="edit-trash"
-                                  style={{ marginLeft: "10px" }}
-                                  onClick={() => this.alertHandler(product._id)}
-                                >
-                                  <FontAwesomeIcon icon="trash-alt" />
+                      <td>{product.product_name}</td>
+                      <td>{product.product_type}</td>
+                      <td>{product.product_description}</td>
+                      <td>{product.purchase_date}</td>
+                      <td>{product.product_price}</td>
+                      <td>
+                        {this.props.sectionStatus === "products" ? (
+                          <>
+                            <span className="edit-trash"
+
+                              onClick={() => this.editHandler(product._id)}
+                            >
+                              <FontAwesomeIcon icon="edit" />
                             </span>
-                            </>
-                          ) : (
-                              " "
-                            )
-                      }
-                        </td>
-                      </tr>
-                
-                  
-                      ))}
+                            <span
+                              className="edit-trash"
+                              style={{ marginLeft: "10px" }}
+                              onClick={() => this.alertHandler(product._id)}
+                            >
+                              <FontAwesomeIcon icon="trash-alt" />
+                            </span>
+                          </>
+                        ) : (
+                            " "
+                          )
+                        }
+                      </td>
+                    </tr>
+
+
+                  ))}
 
 
                 </tbody>
@@ -152,28 +162,28 @@ class Products extends Component {
         {this.props.deleteId === 0 ? (
           " "
         ) : (
-              <div className="alert">
-                    <div className="alert-message">
-                      <h2>Delete Product</h2>
-                      <p>
-                      You are will delete this product. Are you sure you want to continue?
+            <div className="alert">
+              <div className="alert-message">
+                <h2>Delete Product</h2>
+                <p>
+                  You are will delete this product. Are you sure you want to continue?
                       </p>
-                      <div className="alert-button-holder">
-                        <button
-                          class="delete-button-cancel border-radius"
-                          onClick={() => this.alertHandler(0)}
-                        >
-                          CANCEL
+                <div className="alert-button-holder">
+                  <button
+                    class="delete-button-cancel border-radius"
+                    onClick={() => this.alertHandler(0)}
+                  >
+                    CANCEL
                         </button>
-                        <button
-                          className="delete-button-delete border-radius"
-                          onClick={() => this.removeProductHandler(this.props.deleteId)}
-                        >
-                          DELETE
+                  <button
+                    className="delete-button-delete border-radius"
+                    onClick={() => this.removeProductHandler(this.props.deleteId)}
+                  >
+                    DELETE
                         </button>
-                      </div>
-                      </div>
                 </div>
+              </div>
+            </div>
           )}
       </>
     );
@@ -186,7 +196,8 @@ const mapStateToProps = state => {
     sectionStatus: state.sectionStatus,
     alertStatus: state.alertStatus,
     deleteId: state.deleteId,
-    year: state.year
+    year: state.year,
+    token: state.userToken
   };
 };
 
@@ -196,7 +207,8 @@ const mapDispatchToProps = dispatch => {
     removeProduct: id => dispatch(actionTypes.removeProduct(id)),
     setSectionStatus: status => dispatch(actionTypes.setSectionStatus(status)),
     setAlertStatus: id => dispatch(actionTypes.setAlertStatus(id)),
-    setEditId: id => dispatch(actionTypes.setEditId(id))
+    setEditId: id => dispatch(actionTypes.setEditId(id)),
+    setLogout: data => dispatch(actionTypes.setLogout(data))
   };
 };
 

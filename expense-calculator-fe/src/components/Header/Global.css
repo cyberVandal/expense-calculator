@@ -235,17 +235,17 @@ h2 {
 
 .logout-img {
   
-  width: 35px;
+  width: 20px;
   object-fit: cover;
   border-radius: 50px; 
-  margin-left: 25px;
-  background: url("./logout.png") no-repeat;
-  display: inline-block;
+  margin-left: 20px;
+ 
+ 
 }
 
-.logout-img:hover{
+.logout-img:hover {
  
-  background: url("./logout1.png") no-repeat;
+  cursor: pointer;
 }
 /* .alert{
     visibility: hidden;

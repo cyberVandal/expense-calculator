@@ -1,16 +1,43 @@
 import React, { Component } from "react";
-import "../../css/Global.css";
+import "./Global.css";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
+import { Redirect } from 'react-router-dom';
 import * as actionTypes from "../../store/actionTypes";
 import image from "./user.png";
+import logout from "./logout.png";
+import logout1 from "./logout1.png";
 
 
 class Header extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      clicked: false
+
+
+    };
+  }
+
   sectionStatusHandler = status => {
     this.props.setSectionStatus(status);
   };
+
+  logout = () => {
+    this.props.setUserName("");
+    this.props.setUserToken("");
+    this.setState({ clicked: true });
+    //this.props.setLogout(true);
+
+  }
+
+
   render() {
+    if (this.state.clicked === true) {
+      return <Redirect to='/' />
+    }
     return (
       <>
         <div className="dashboard-header">
@@ -45,11 +72,24 @@ class Header extends Component {
           <div className="avatar-holder">
             <img
               className="avatar-img"
-              src={image}  
-             // src="https://cdn.pixabay.com/photo/2018/01/15/07/51/woman-3083376__340.jpg"
+              src={image}
+              // src="https://cdn.pixabay.com/photo/2018/01/15/07/51/woman-3083376__340.jpg"
               alt="Smiley face"
             />
             <span>{this.props.user}</span>
+
+            <span onClick={() => this.logout()}>
+              <img
+                className="logout-img"
+                src={logout}
+                alt="Logout" />
+            </span>
+
+            {/* <img
+              className="logout-img"
+              src={logout}
+              alt="Logout"
+            /> */}
           </div>
         </div>
       </>
@@ -66,7 +106,10 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setSectionStatus: status => dispatch(actionTypes.setSectionStatus(status))
+    setSectionStatus: status => dispatch(actionTypes.setSectionStatus(status)),
+    setUserName: user => dispatch(actionTypes.setUserName(user)),
+    setUserToken: token => dispatch(actionTypes.setUserToken(token)),
+    setLogout: data => dispatch(actionTypes.setLogout(data))
   };
 };
 
