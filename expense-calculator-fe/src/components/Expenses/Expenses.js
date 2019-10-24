@@ -266,7 +266,8 @@ const mapStateToProps = state => {
     sectionStatus: state.sectionStatus,
     sum: state.sum,
     userName: state.userName,
-    year: state.year
+    year: state.year,
+    token: state.userToken
   };
 };
 
