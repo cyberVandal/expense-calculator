@@ -9,12 +9,11 @@ import * as actionTypes from "../../store/actionTypes";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 //import TableRows from "../TableRows/TableRows";
 //import EditDeleteIcon from "../EditDeleteIcon/EditDeleteIcon";
-import Alert from "../Alert/Alert";
+//import Alert from "../Alert/Alert";
 
 class Products extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       products: [],
       deleteId: 0
@@ -30,31 +29,21 @@ class Products extends Component {
         if(response.data[i].user_name === this.props.userName){
 
             userProducts.push(response.data[i]);
-            //sum = sum + this.props.products[i].product_price;
-            //console.log(this.props.products[i].user_name);
          }
-         
         }
-        
-
         this.props.init(userProducts);
       });
    
   }
 
   removeProductHandler = id => {
-
-
     axios.delete(`http://localhost:8080/api/products/${id}`)
       .then(response => {
         if(response.status === 200){
           this.productsUpdate();
           this.props.removeProduct(id);
         }
-       
       } );
-    
-    
   };
 
   editHandler = id => {
@@ -163,11 +152,6 @@ class Products extends Component {
         {this.props.deleteId === 0 ? (
           " "
         ) : (
-            // <Alert
-            //   clickDelete={this.removeProductHandler}
-            //   clickStatus={this.alertHandler}
-            //   id={this.props.deleteId}
-            // />
               <div className="alert">
                     <div className="alert-message">
                       <h2>Delete Product</h2>

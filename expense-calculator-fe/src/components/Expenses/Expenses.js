@@ -3,16 +3,20 @@ import "../../css/Global.css";
 import Header from "../Header/Header";
 import { connect } from "react-redux";
 import * as actionTypes from "../../store/actionTypes";
-import SelectorMonthly from "../SelektorMonthly/SelektorMonthly";
-import SelectorYearly from "../SelectorYearly/SelectorYearly";
-import TableRows from "../TableRows/TableRows";
+// import SelectorMonthly from "../SelektorMonthly/SelektorMonthly";
+// import SelectorYearly from "../SelectorYearly/SelectorYearly";
+// import TableRows from "../TableRows/TableRows";
 
 class Expenses extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      year: "kur"
+      changeSumYear: 0,
+      changeSumMonth:0,
+      year: "All",
+      month:"All",
+      filterProductsMonth: []
     };
   }
   componentDidMount() {
@@ -20,14 +24,17 @@ class Expenses extends Component {
 
     var sum = 0;
     for (let i = 0; i < this.props.products.length; i++) {
-    //if(this.props.products[i].user_name === this.props.userName){
+    
         sum = sum + this.props.products[i].product_price;
-        //console.log(this.props.products[i].user_name);
-    // }
-     
+    
     }
     this.props.setFilterProducts(this.props.products);
     this.props.setSum(sum);
+    this.setState({
+      filterProductsMonth: this.props.products,
+      changeSumYear: sum,
+      changeSumMonth: sum
+    })
 
   }
 
@@ -36,27 +43,64 @@ class Expenses extends Component {
   };
 
   yearSelectHandler = (e) => {
-     
+      console.log(e.target.value);
       this.props.setYear(e.target.value);
-      this.setState({year: e.target.value});
-     
       var filterProducts = [];
-      var sum = 0;
-      for (let i = 0; i < this.props.products.length; i++) {
-        if(this.props.products[i].purchase_date.slice(0, 4) === this.props.year){
+      var sum1 = 0;
+      if(e.target.value === "All"){
+        this.props.setFilterProducts(this.props.products);
+        //this.props.setSum(this.props.sum);
+        this.setState({
+            year:"All",
+            changeSumYear: this.props.sum
+        })
+      }else{
+        for (let i = 0; i < this.props.products.length; i++) {
+          if(this.props.products[i].purchase_date.slice(0, 4) === e.target.value){
+              
+            filterProducts.push(this.props.products[i]);
+            sum1 = sum1 + this.props.products[i].product_price;
+             
+           }
+        }
+          this.props.setFilterProducts(filterProducts);
+          this.setState({
+            changeSumYear: sum1,
+            year: e.target.value,
+            filterProductsMonth: filterProducts
+          })
+      }
+  };
+  monthSelectHandler = (e) => {
+    console.log(this.props.products[2].purchase_date.slice(5, 7));
+
+    this.props.setYear(e.target.value);
+    var filterProducts1 = [];
+    var sum2 = 0;
+    if(e.target.value === "All"){
+        this.setState({
+          filterProductsMonth: this.props.filterProducts,
+          month: "All",
+          changeSumMonth: this.state.changeSumYear
+        })
+    }else {
+
+      for (let i = 0; i < this.props.filterProducts.length; i++) {
+        if( this.props.filterProducts[i].purchase_date.slice(5, 7) === e.target.value){
             
-          filterProducts.push(this.props.products[i]);
-          sum = sum + this.props.products[i].product_price;
+          filterProducts1.push(this.props.filterProducts[i]);
+          sum2 = sum2 + this.props.filterProducts[i].product_price;
            
          }
       }
-
-     
-        
-        this.props.setFilterProducts(filterProducts);
-        this.props.setSum(sum);
-        console.log(this.state.year);
-  };
+        //this.props.setFilterProducts(filterProducts);
+        this.setState({
+          changeSumMonth: sum2,
+          month: e.target.value,
+          filterProductsMonth: filterProducts1
+        })
+    }
+};
 
   render() {
     return (
@@ -89,12 +133,46 @@ class Expenses extends Component {
                 YEARLY
               </button>
               {this.props.tabStatus === "monthly" ? (
-                <SelectorMonthly />
+                <>
+                    <label className="margin-left">Choose Month</label>
+                    <select className="border-radius" onChange={this.monthSelectHandler} value={this.state.month}>
+                      <option value="All">All</option>
+                      <option value="01">01</option>
+                      <option value="02">02</option>
+                      <option value="03">03</option>
+                      <option value="04">04</option>
+                      <option value="05">05</option>
+                      <option value="06">06</option>
+                      <option value="07">07</option>
+                      <option value="08">08</option>
+                      <option value="09">09</option>
+                      <option value="10">10</option>
+                      <option value="11">11</option>
+                      <option value="12">12</option>
+                      
+                    </select>
+                  </>
               ) : (
-                  <SelectorYearly
-                  
-                    selectYear={this.yearSelectHandler}
-                  />
+                  <>
+                      <label className="margin-left">Choose Year</label>
+                      <select className="border-radius" onChange={this.yearSelectHandler} value={this.state.year}>
+                        <option value="All">All</option>
+                        <option value="2019">2019</option>
+                        <option value="2018">2018</option>
+                        <option value="2017">2017</option>
+                        <option value="2016">2016</option>
+                        <option value="2015">2015</option>
+                        <option value="2014">2014</option>
+                        <option value="2013">2013</option>
+                        <option value="2012">2012</option>
+                        <option value="2011">2011</option>
+                        <option value="2010">2010</option>
+                        <option value="2009">2009</option>
+                        <option value="2008">2008</option>
+                        <option value="2007">2007</option>
+                        <option value="2006">2006</option>
+                      </select>
+                    </>
                 )}
             </div>
             <div className="dashboard-container-table">
@@ -107,18 +185,44 @@ class Expenses extends Component {
                   <th>Product Price</th>
                   <th />
                 </tr>
-                <TableRows
-                  products={this.props.filterProducts}
-                  sectionStatus={this.props.sectionStatus}
-                  userName={this.props.userName}
-                  year={this.props.year}
-                />
+                <tbody>
+                   {
+                     this.props.tabStatus === "yearly" ? (
+                       this.props.filterProducts.map(product => (
+                
+                      <tr key={product.id}>
+                          <td>{product.product_name}</td>
+                          <td>{product.product_type}</td>
+                          <td>{product.product_description}</td>
+                          <td>{product.purchase_date}</td>
+                          <td>{product.product_price}</td>
+                          <td>
+                           
+                          </td>
+                        </tr>
+                        ))):(
+                          this.state.filterProductsMonth.map(product => (
+                
+                            <tr key={product.id}>
+                                <td>{product.product_name}</td>
+                                <td>{product.product_type}</td>
+                                <td>{product.product_description}</td>
+                                <td>{product.purchase_date}</td>
+                                <td>{product.product_price}</td>
+                                <td>
+                                 
+                                </td>
+                              </tr>
+                              ))
+                        )
+                     }
+                </tbody>
               </table>
             </div>
           </div>
         </div>
         <footer>
-          <h2>Total spent: {this.props.sum} den.</h2>
+          <h2>Total spent: {this.props.tabStatus === "yearly" ? (this.state.changeSumYear):(this.state.changeSumMonth)} den.</h2>
         </footer>
       </>
     );

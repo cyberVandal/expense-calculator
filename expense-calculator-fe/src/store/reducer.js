@@ -19,7 +19,7 @@ const initialState = {
   products: [],
   userProducts: [],
   filterProducts:[],
-  tabStatus: "monthly",
+  tabStatus: "yearly",
   sectionStatus: "products",
   sum: 0,
   deleteId: 0,

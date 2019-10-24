@@ -18,13 +18,11 @@ class Main extends Component {
   render() {
     return (
       <>
-
-
-        <ul>
+        {/* <ul>
           <li><Link to="/">Home</Link></li>
           <li><Link to="/secret">Secret</Link></li>
           <li><Link to="/login">Login</Link></li>
-        </ul>
+        </ul> */}
         <Switch>
 
           <Route path="/login" component={Login} />
@@ -32,7 +30,7 @@ class Main extends Component {
           <Route path="/products" component={Products} />
           <Route path="/expenses" component={Expenses} />
           <Route path="/create-product" component={CreateProduct} />
-          <Route path="/" exact component={Home} />
+          <Route path="/" exact component={Login} />
           <Route path="/secret" component={Secret} />
           <Route path="/edit-product" component={EditProduct} />
         </Switch>

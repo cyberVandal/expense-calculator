@@ -67,7 +67,7 @@ class Login extends Component {
         <div className="column">
           <div className="main">
             <form onSubmit={this.onSubmit}>
-              <label for="email">E-mail: </label>
+              <label>E-mail: </label>
               <input
                 className="border-radius form-input"
                 type="text"
@@ -79,14 +79,13 @@ class Login extends Component {
               {
                 this.props.errEmail !== '' ? <p>{this.props.errEmail}</p> : null
               }
-              <label for="pass">Password:</label>
+              <label>Password:</label>
               <input
                 className="border-radius form-input"
                 type="password"
                 name="pass"
                 onChange={this.handleChangePass}
               />
-
               <input
                 className="border-radius button-solid"
                 type="submit"
