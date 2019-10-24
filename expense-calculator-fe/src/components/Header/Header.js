@@ -3,6 +3,8 @@ import "../../css/Global.css";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import * as actionTypes from "../../store/actionTypes";
+import image from "./user.png";
+
 
 class Header extends Component {
   sectionStatusHandler = status => {
@@ -43,7 +45,8 @@ class Header extends Component {
           <div className="avatar-holder">
             <img
               className="avatar-img"
-              src="https://cdn.pixabay.com/photo/2018/01/15/07/51/woman-3083376__340.jpg"
+              src={image}  
+             // src="https://cdn.pixabay.com/photo/2018/01/15/07/51/woman-3083376__340.jpg"
               alt="Smiley face"
             />
             <span>{this.props.user}</span>

@@ -16,7 +16,8 @@ class Expenses extends Component {
       changeSumMonth:0,
       year: "All",
       month:"All",
-      filterProductsMonth: []
+      filterProductsMonth: [],
+      
     };
   }
   componentDidMount() {
@@ -40,6 +41,9 @@ class Expenses extends Component {
 
   tabClickHandler = status => {
     this.props.setTabStatus(status);
+    this.setState({
+      month: "All"
+    })
   };
 
   yearSelectHandler = (e) => {
@@ -101,6 +105,13 @@ class Expenses extends Component {
         })
     }
 };
+tabChangeSum = (status) => {
+   this.props.setTabStatus(status);
+    this.setState({
+      changeSumMonth: this.state.changeSumYear,
+      month:"All"
+    })
+}
 
   render() {
     return (
@@ -113,7 +124,10 @@ class Expenses extends Component {
             </div>
             <div className="margin-left">
               <button
-                onClick={() => this.tabClickHandler("monthly")}
+                onClick={
+                  //() => this.tabClickHandler("monthly")
+                  () => this.tabChangeSum("monthly")
+                }
                 className={
                   this.props.tabStatus === "monthly"
                     ? "tab-button-clicked border-radius-left"
