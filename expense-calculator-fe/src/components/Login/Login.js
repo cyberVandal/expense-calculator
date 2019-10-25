@@ -5,7 +5,7 @@ import axios from "axios";
 import "../../css/Global.css";
 import { NavLink } from "react-router-dom";
 import * as actionTypes from "../../store/actionTypes";
-
+import logo from "./logo.png"
 class Login extends Component {
 
   constructor() {
@@ -70,8 +70,15 @@ class Login extends Component {
     return (
       <div className="wrapper">
         <div className="column">
+          <div className="logo-container1">
+             <img
+                className="logo-img"
+                src={logo}
+                alt="Logo" 
+              />
+          </div>
           {this.state.clicked === false ? ("") : (<div className="text-holder">
-            <p>
+            <p style={{color:"red"}}> 
               Please Login first!
             </p>
           </div>)}
@@ -114,6 +121,9 @@ class Login extends Component {
                 register
               </NavLink>
             </p>
+          </div>
+          <div className="space">
+
           </div>
         </div>
       </div>

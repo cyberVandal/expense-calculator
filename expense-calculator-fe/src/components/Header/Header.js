@@ -1,12 +1,13 @@
 import React, { Component } from "react";
-import "./Global.css";
+import "./Header.css";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { Redirect } from 'react-router-dom';
 import * as actionTypes from "../../store/actionTypes";
 import image from "./user.png";
 import logout from "./logout.png";
-import logout1 from "./logout1.png";
+import logo from "./logo.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
 class Header extends Component {
@@ -69,6 +70,16 @@ class Header extends Component {
               </button>
             </NavLink>
           </div>
+
+          {/* Logo */}
+          <div className="logo-container">
+             <img
+                className="logo-img"
+                src={logo}
+                alt="Logo" 
+              />
+          </div>
+
           <div className="avatar-holder">
             <img
               className="avatar-img"
@@ -79,10 +90,10 @@ class Header extends Component {
             <span>{this.props.user}</span>
 
             <span onClick={() => this.logout()}>
-              <img
+               <img
                 className="logout-img"
                 src={logout}
-                alt="Logout" />
+                alt="Logout" /> 
             </span>
 
             {/* <img

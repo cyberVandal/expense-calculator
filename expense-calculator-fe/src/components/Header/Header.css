@@ -247,6 +247,20 @@ h2 {
  
   cursor: pointer;
 }
+.logo-img {
+  
+  width: 200px;
+  object-fit: cover;
+  text-align: center;
+  /* margin-top: 20px; */
+  
+}
+.logo-container{
+ text-align: center;
+ margin-top: 15px;
+ margin-bottom: 15px;
+ 
+}
 /* .alert{
     visibility: hidden;
     display: flex;

@@ -247,6 +247,19 @@ h2 {
  
   background: url("./logout1.png") no-repeat;
 }
+
+.logo-img {
+  
+  width: 200px;
+  object-fit: cover;
+  text-align: center;
+  
+}
+.logo-container1{
+ text-align: center;
+ margin-bottom: 35px;
+}
+
 /* .alert{
     visibility: hidden;
     display: flex;
@@ -269,6 +282,7 @@ h2 {
   background-color: white;
   border-radius: 15px;
 }
+
 .alert-message h2 {
   color: #576574;
   margin-top: 0;
@@ -326,6 +340,10 @@ h2 {
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: background-color 5s;
+}
+.space{
+  min-height: 100px;
 }
 
 #non-something {
@@ -362,6 +380,9 @@ h2 {
 }
 .edit-trash {
   cursor: pointer;
+}
+.edit-trash:hover{
+  color:#1DD1A1;
 }
 .border-radius-left {
   border-top-left-radius: 5px;
