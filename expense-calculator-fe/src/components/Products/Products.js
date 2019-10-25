@@ -98,13 +98,13 @@ class Products extends Component {
               <div>
                 <h1>Products</h1>
               </div>
-              <div>
+              {/* <div>
                 <select className="border-radius">
                   <option value="volvo">Day</option>
                   <option value="saab">Mounth</option>
                   <option value="opel">Year</option>
                 </select>
-              </div>
+              </div> */}
             </div>
             <div className="dashboard-container-table">
               <table>
