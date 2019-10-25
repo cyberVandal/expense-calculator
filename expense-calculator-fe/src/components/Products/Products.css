@@ -200,7 +200,10 @@ td{
     cursor: pointer;
     Color: #fff;
     border: none;
-    
+    transition-duration: 1s;
+}
+.fixed-button:hover{
+    background-color: #1DD1A1;
 }
 .tab-button{
     background: #1DD1A1;
